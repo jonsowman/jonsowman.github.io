@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Apex I | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="apex-i">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li class="active"><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/apex">Apex</a>
+<span class="separator">/</span></li>
+<li class="active">
+Apex I
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">Apex Projects</li>
+
+
+
+<li class="active"><a href="/apex/apex-i.html">Apex I</a></li><li><a href="/apex/apex-ii.html">Apex II</a></li>
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Project Apex I</h1>
+
+<hr />
+
+<p>A high altitude weather balloon launched by Sutton Grammar School in 2008/09</p>
+
+<p><a href="http://apex.hexoc.com/gallery/">Image Gallery</a></p>
+
+<p><a href="/apex/apex-i-log.html">Project Log</a></p>
+
+<p><a href="/apex/apex-i-kernel-devlog.html">Kernel
+    Development Log</a></p>
+
+<hr />
+
+<ul>
+    <li><a href="#aims">Project Aims</a></li>
+    <li><a href="#comms">Communications Subsystem</a>
+    <ul>
+        <li><a href="#tncs">Terminal Node Controllers</a></li>
+        <li><a href="#radios">Radios</a></li>
+    </ul>
+    </li>
+    <li><a href="#payload">Payload</a>
+    <ul>
+        <li><a href="#fpc">Flight Computer</a></li>
+        <li><a href="#scipts">Scripts</a></li>
+    </ul>
+    </li>
+    <li><a href="#balloonhelium">Balloon/Parachute/Helium</a></li>
+    <li><a href="#basestations">Base Stations</a></li>
+    <li><a href="#funds">Funding</a></li>
+    <li><a href="#launch">Launch</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#other_links">Other Links</a></li>
+</ul>
+
+<p>
+<a href="http://www.hexoc.com/balloon/images/projects-apex-i-payload.jpg"><img width="300" height="225" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-payload.jpg" /></a>
+<a href="http://www.hexoc.com/balloon/images/projects-apex-i-bus.jpg"><img width="300" height="201" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-bus.jpg" /></a>
+</p>
+
+<h2><a name="aims">Project Aims</a></h2>
+
+<p>Like the majority of interesting engineering projects, the original stimulus for this project was to see whether it could be done. Specifically in this case, that was to launch high altitude helium balloon at reasonable cost, with the primary aim of recovering the payload after the flight. As such, relatively expensive equipment could be used again for another flight. Specifications When the project first began, we had a number of things we wished it to achieve:</p>
+
+<ul>
+    <li>
+    <div class="li">The payload to be largely reusable</div>
+    </li>
+    <li>
+    <div class="li">To take lots of high altitude pictures at a reasonable resolution</div>
+    </li>
+    <li>
+    <div class="li">To be easy to operate, to aid a repeated launch by the younger years at the school</div>
+    </li>
+    <li>To record environmental variables such as temperature and pressure at altitude</li>
+</ul>
+
+<h2><a name="comms">Communication</a></h2>
+
+<div class="level2">
+<p>
+</p>
+<div>At the time of writing, the altitude record for a helium balloon flight stands at just less than 110,000ft. This was a balloon that had far fewer features and a single-board electronic solution, so we were never going to get anywhere near that. Nonetheless, we planned for all communications to be functional up to 110,000ft. For an electronic system that is going to need to have at least one way communication (and probably two way) with the ground at anything up to that altitude, the reliability of the communications subsystem is absolutely vital.</div>
+<div>&nbsp;</div>
+<div>As such, a considerable amount of time went into researching methods of communication between the base stations and the payload. Our first thought was using mobile phones on the GSM network, but we soon found this is illegal as the phone would be in range of far too many masts. However, it was not entirely dismissed since there was nothing to stop us turning on the mobile phone system once the payload had landed. 2.4GHz wireless networking equipment can be heavily modified to give quite astonishing range, but our budget was too limited and the antennas would be far too complex.</div>
+<div>&nbsp;</div>
+<div>The solution we eventually decided upon was packet radio transmissions on the amateur bands. In the UK, OFCOM allocate a few bands for amateur use, divided primarily into licensed and license-exempt subsections. Packet radio is a relatively new development in amateur radio, using an over-the-air protocol called AX.25 (a variant of X.25). A device called a Terminal Node Controller is used to encode the inputted serial data into AX.25 frames and then through a modem into audio tones; it does the reverse at the receiving end. Traditional packet uses a 1200 on-the-air baud rate, but newer systems are capable of 9600 baud. 1200 baud would have to suffice for our purposes, since 9600 baud equipment would be too expensive. One of the more recent developments in packet radio is APRS (Automated Packet Reporting System). Its website describes it as a &ldquo;real time tactical digital communications of information of immediate value in the local area&rdquo;. In this instance, it provides a protocol for transmitting position reports and allows for a comment at the end of the string, which permits us to transmit sensor data. There are numerous packet software systems which understand and interpret APRS data, one of the most well known being UI-View.</div>
+<div>&nbsp;</div>
+<div>We initially wanted to go with traditional amateur radio on the 2m band, and even went as far as two of the leading project members obtaining licenses. This band would allow us to make use of the APRS repeater network (on 144.800Mhz in Europe) and to transmit with anything up to 10W of power, which could quite easily manage 100 miles of range line-of-sight &ndash; 110,000ft would present it no problems whatsoever. However, we then discovered that OFCOM don&rsquo;t allow amateur radio transmitters on unmanned airborne systems in the UK. The majority of people involved in this sort of thing in this country seemed to be well aware of this fact, but even after 5 months of project work and talking to countless people and companies, nobody had ever mentioned it to us!</div>
+<div>&nbsp;</div>
+<div>Help came in the form of a guy at the RSGB (Radio Society of Great Britain) who mentioned a frequency called PMR446. It&rsquo;s usually used for walkie-talkie type devices, but allows a higher transmission power (0.5W) than the other license-exempt bands that are used for things like low-range walkie-talkies and remote car key fobs (860 MHz and 434 MHz respectively). Whilst it meant buying new radios, this could not be avoided and PMR446 was deemed to be a viable solution.</div>
+<h3><a name="tncs">Terminal Node Controllers</a></h3>
+<div><u><o:p></o:p></u></div>
+<div>If a TNC is operating in a mode where it actions AX.25 protocol encode/decode, it is said to be in Terminal Mode. If it relies on external hardware to do this, it&rsquo;s called a KISS Mode TNC. Predictably, a KISS Mode TNC is cheaper than a Terminal Mode one. One (big) advantage of using a Linux based flight computer is that one part of the TNC functionality can be completed by the computer &ndash; namely the AX.25 encode/decode. The TNC required for the payload was therefore a KISS Mode one, and we went for the excellent TNC-X KISS Mode TNC kit from Coastal Chipworks (<a href="http://www.tnc-x.com/">www.tnc-x.com</a>). It took an hour or so to solder up and get running, using an external 5V regulator rather than the onboard one (as this would be how it would eventually operate in the balloon). It was attached to the flight computer via a homemade lightweight serial cable, and via standard 3.5mm audio jacks to the radios.</div>
+<div>&nbsp;</div>
+<div>For two tracking stations, we would require two Terminal Mode TNCs, and these were going to be prohibitively expensive. That was until we discovered software called AGWPE, which uses a computer soundcard and processor to emulate a fully-featured TNC. In fact, it is claimed that they are actually better in some respects, as the soundcard is extremely sensitive and can thus decode attenuated or distorted on-air audio tones that a traditional TNC could not. We borrowed a couple of Toshiba laptops from the Physics department at the school and set them up appropriately (see Ground Stations).</div>
+<h3><a name="radios">Radios</a></h3>
+<div><u><o:p></o:p></u></div>
+<div>The radio transceivers themselves were the TX-1446 PMR446 units from TTI UK. They held one big advantage which other PMR446 units did not, which was the ability to remove the antenna. Whilst PMR446 specification states that the antenna of the transmitter must not be modified, there was nothing to stop us making a receiver antenna that had far higher gain than the inbuilt rubber duck model. PMR446 also gave us the opportunity to use CTCSS/DCS, which would help in reducing interference. One big problem with communicating on a much more widely used frequency was that when the balloon was in the air, it would be able to hear all communication on that channel across the majority of the country. A combination of squelch systems and the TNC&rsquo;s ability to find &ldquo;slots&rdquo; in which to transmit we hoped would get around this problem to the furthest possible extent.</div>
+<h2><a name="payload">The Payload</a></h2>
+</div>
+
+<p>After several weeks of research followed by several months of design and manufacture, the payload electronics were completed. They comprise a Linux flight computer attached to radio equipment for two way communication between the balloon and the base stations. A GPS device and a microcontroller were also onboard, the latter taking data from pressure and temperature sensors and returning it to the flight computer. The majority of the electronics was run from a 5V switch mode regulator, running from lithium thionyl chloride batteries. These were chosen for their tolerance to low temperatures and their high power to weight ratio. The imaging device was a servo-mounted Canon camera, controlled by the microcontroller.</p>
+
+<p><a href="http://www.hexoc.com/balloon/images/projects-apex-i-fpc.jpg"><img width="300" height="225" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-fpc.jpg" /></a><a href="http://www.hexoc.com/balloon/images/projects-apex--ireg.jpg"><img width="300" height="225" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex--ireg.jpg" /></a><a href="http://www.hexoc.com/balloon/images/projects-apex-i-elec.jpg"><img width="300" height="225" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-elec.jpg" /></a></p>
+
+<p>Radio beacons are transmitted by the payload once per minute, using APRS format for compatibility with existing packet and tracking programs. The beacons contain the current position, speed, heading and altitude, as well as data from the environmental sensors and a timestamp. All of the electronic systems were designed, from the beginning, to be simple to operate. In this vein, the electronics simply require power, and they are entirely self-testing and self-calibrating. The system beacons and flashes an LED when the start-up sequences are complete.</p>
+
+<p>Of course, some degree of control over the payload is advisable. As such, we installed a &ldquo;cutdown&rdquo; device to allow us to sever the cord between the balloon and the parachute at any time, thereby making the balloon come back down to Earth. This was essentially a piece of nichrome wire coiled around the nylon flight string. Other noteworthy hardware systems include two 1W LEDs that activated during landing to ease payload recovery in the dark, and methods to reboot pieces of hardware, should they fail during flight.</p>
+
+<h3><a name="fpc">Flight Computer</a></h3>
+
+<p>
+</p>
+
+<div>From the start, we had a pretty clear idea of what we wanted the flight electronics to achieve. We also knew that an integrated system &ndash; that&rsquo;s to say a system where all subsidiary systems and devices are controlled from one centralised place &ndash; would make control and setup much easier. From research done on previous projects around the world to varying degrees of success, there seemed to be two feasible options open to us. Either we go for a small microcontroller, such as a PIC, or we go for a fully featured Linux single board computer. Both, of course, had their advantages and disadvantages. The PIC would have much lower current draw and be far easier to debug. As none of the project members had used Linux much before, a Linux machine would certainly be throwing ourselves in at the deep end. On the other hand, a Linux system has inbuilt kernel support for AX.25, and would mean a Terminal-Mode TNC (Terminal Node Controller) was not required at the balloon end. It would also have logging capabilities and GPS NMEA 0183 protocol handling systems that just cannot be executed on a PIC.</div>
+
+<div>&nbsp;</div>
+
+<div>The Linux flight computer won out, and having realised that the priorities were low current draw, fully solid state boot/storage devices and at least 3 COM ports, an ARM based machine seemed like a good idea. The power draw was much lower than their x86 counterparts, and the machine itself was far cheaper. Technologic Systems manufacture several of these boards &ndash; the one we settled on was the TS-7260. It has 3 COM ports and runs a proprietary Busybox variant, but can have its bootrom flashed to boot from SD card. We purchased a 512Mb SD card from TS preloaded with Debian for ARM (I believe the distro is Woody). It took far longer to set the system up than it otherwise would have, simply because of our lack of Linux experience. But the advantage of a steep learning curve is that one becomes proficient rather quickly. The system was soon booting Debian from the SD card perfectly. Although changing operating system was reasonably simple, that was not the end of it. The default kernel (2.4.26-ts11) does not have inbuilt support for amateur radio systems. The modules ax25 and mkiss were required, which meant a lot of kernel development work, which took about a month (see Kernel dev log).</div>
+
+<div>&nbsp;</div>
+
+<div>Connecting the GPS device was extremely simple &ndash; the Globalsat BR-355 GPS outputs data on TTL levels in NMEA 0183 format. There is a Linux daemon called gpsd which watches GPS devices attached to the computer, and which is queried for information via a TCP port. My chosen language for all scripting on the flight computer was Perl, mainly because I was already familiar with it. It&rsquo;s very simple to query a TCP port in Perl, so I knew this wouldn&rsquo;t be a problem.<span style="">&nbsp; </span>The TNC we chose attached straight to one of the other serial ports (see Communications) at 4800 baud, and the final one was used for serial communication with the PICAXE microcontroller (see Avionics) at 2400 baud.</div>
+
+<div>&nbsp;</div>
+
+<div>The TNC was connected to the Linux machine using AX.25 kernel support with the kissattach command. The AX.25 packages also come with a set of daemons, namely ax25d and axspawn which should allow incoming connections over radio. We wished to use these to provide a shell prompt to the remote user, so we could log into the flight computer from a ground station. However, it simply refused to work, and after a few weeks of chats with people on the debian-hams mailing list, I was forced to give up and find another way round it. The solution involved a couple of Perl daemons I wrote, and a utility called ax25spyd (see script detail for ax25perl and ax25emgd).</div>
+
+<div>&nbsp;</div>
+
+<div><a name="scipts">The </a>scripts written for the flight computer were numerous, so I will only list and detail the main ones here. All scripts were written in Perl unless otherwise noted.</div>
+
+<div><u>flightj.pl<o:p></o:p></u></div>
+
+<div>This was the main flight script, including flight logic, GPS querying, APRS formatting and beaconing. It was called once every minute from cron. At runtime, it would turn on the green LED before querying the time from the PICAXE. This time was only used in the event of the GPS not having a lock on satellites. It would then request the APRS suffix/comment from the PICAXE, which was a string containing detail from the avionics set (temperatures, pressure, and battery voltage). GPS querying was next on the list, and then flight logic. The flight logic consisted of computing the distance across ground from the launch site, and if it was more than a predetermined value, the cutdown device was activated. Altitude and velocity limits were included in the script, was these were disabled before launch. The reasons for this were that we knew the GPS would not work about 60,000ft, and we did not know how fast the balloon could go in the jet stream. Finally, this script told the PICAXE to run the camera control routine, before exiting.</div>
+
+<div><u>boot.pl<o:p></o:p></u></div>
+
+<div>This script only ran once &ndash; at system boot &ndash; but it was nonetheless important. At runtime, it would send a PING command to the PICAXE and wait for a response to make sure it was online and ready to receive commands. Secondly, the red LED was lit and kept that way until the GPS got a lock on satellites. When lock was achieved, the time was pulled from the GPS and sent to the PICAXE, so its clock (DS1307) could be set correctly. The launch time, date and location were then stored in /root/etc/startup for use by flightj.pl during distance-from-start calculations. crontab for root was then cleared and reset with flightj.pl. When the script had finished all its processes, it send a command to the PICAXE to flash the status LED (red) and the two white 1W LEDs for 5 seconds. It also sent a beacon saying &ldquo;Startup complete&rdquo; so that tracking stations could determine when the payload was ready for launch.</div>
+
+<div><u>balloonboot<o:p></o:p></u></div>
+
+<div>This was a Bash script, run by rc.d at startup. Its first job was to insert modules into the running kernel required for system operation. This was ax25 and mkiss, as well as modules for the TS-7260 board&rsquo;s software UART (ttyTS0). It set up other things as well, including kissattach and axparms for the TNC, and syslogd for debug purposes. Finally, it called boot.pl to finish the startup routines.</div>
+
+<div><u>ax25perld<o:p></o:p></u></div>
+
+<div>The daemon called ax25spyd is one that is very similar to one called listen, which is in the AX.25 packages. ax25spyd listens on all AX.25 ports connected to the machine, and outputs data on a monitor port (14091). ax25perld was the beginning of my ax25d alternative. It was built to watch ax25spyd&rsquo;s monitor port and wait for a callsign that matches one of our base stations. After this, it looks for a string that matches an over-the-air command protocol that we wrote. A typical command would look something like &ldquo;SGSHELLO [password] &lt;args&gt;&rdquo;. SGS was the control string and must exist for the script to parse the command. The following capital letters (HELLO in the example) were the command. A password in then supplied in square brackets, followed by any arguments that command may require. All commands executed in this way are timed out at ten seconds, which prevents the script crashing in the case of a malformed command. The script then beacons &ldquo;SGSBalloon: &lt;response&gt;&rdquo;, where &lt;response&gt; is any response from the command that was just run. Some commands (such as &ldquo;cut down balloon&rdquo;) required a 16-character authentication code as their argument. This was primarily to prevent us typing them in by accident.</div>
+
+<div><u>ax25emgd<o:p></o:p></u></div>
+
+<div>This script was nearly a carbon-copy of ax25perld, but it only listened for one command. This was the killall command, which killed any running copies of ax25perld, avionicsd and flightj.pl. Obviously, this script was only to be used as a last-ditch attempt at restarting communications systems should some drastic failure occur. The restarting of said scripts was left down to cron.</div>
+
+<div><u>avionicsd<o:p></o:p></u></div>
+
+<div>This was simply a serial-TCP interface daemon written in Perl. Flight scripts and perl scripts would connect to it in order to send and receive commands from the PICAXE.</div>
+
+<div><u>cron</u></div>
+
+<div>Admittedly this is not technically a script, but it&rsquo;s important so I thought I&rsquo;d mention it here. cron was responsible for running flightj.pl every minute, but also ran a script called launcher.pl. This was run on ax25perld and ax25emgd, and simply checked whether they were running. If they were, it exited immediately. If not, it attempted to restart them.</div>
+
+<h2><a name="balloonhelium">Balloon, Parachute &amp; Helium</a></h2>
+
+<div class="level2">
+<p>The balloon and parachute came from an American company named Kaymont. The KCI-1200 balloon seems the most popular for similar projects, and the parachute was one recommended to be by a company representative. Helium was provided under staff discount from Air Products in the UK. The cylinder was the X47S type, with filling equipment from ABC Inflatables.</p>
+</div>
+
+<h2><a name="basestations">Base Stations</a></h2>
+
+<div>One large problem with helium balloons is that their flight path is rarely simple. Whilst path and landing site prediction software systems exist, we knew that these would only give us a rough estimate &ndash; at best. In the end, we decided that two vehicles following the balloon would be the best solution, as it gave us hugely more flexibility. A school minibus was one of them; the other was the car of one of the lead project members. The downside of this was, of course, that two tracking station systems were required.</div>
+
+<div>&nbsp;</div>
+
+<div>A tracking station required a laptop, radio and TNC (see Communications) but the software TNC emulator called AGWPE would more than suffice. It simply requires a soundcard with a speaker/headphone jack and a line in/microphone port. The interface cables vary slightly depending on the radio (handheld radios tend to have the PTT line included in the microphone cable), but they are extremely easy to construct and comprise simply some shielded audio cable, with a resistor and capacitor. AGWPE requires some method of keying the PTT for transmit, and this is done by dragging the RTS line of a serial port high/low. We therefore required laptops with serial ports, but most good USB-serial adapters will allow software control of hardware flow control pins (of which RTS is a member).</div>
+
+<div>&nbsp;</div>
+
+<div>AGWPE outputs and inputs data from the radio on one side and from a TCP port on the other. The front end software would need to carry out three important functions. First and foremost, it must show the balloon&rsquo;s current location/speed/altitude on a map. Secondly, it must display all the data from the onboard sensors as well as the battery voltage. Lastly, it needed to provide some method of talking to the balloon should the need arise. We decided that logging all position data and sensor data would also be a good idea, as we could then replay the flight later on.</div>
+
+<div>&nbsp;</div>
+
+<div>The mapping solution was the fantastic piece of software called APRSPoint, which runs on top of Microsoft&rsquo;s Mappoint. It has the option to place an icon on the map for each beacon coming in from the balloon, which would be perfect for our needs. Mappoint itself contains maps of the whole of Europe, and stores all data on the local hard drive, so no internet connection is required. APRSPoint can also display the current altitude, heading and velocity of the balloon. It can display the comment part of the APRS string, but it can&rsquo;t decode it into a useful format.</div>
+
+<div>&nbsp;</div>
+
+<div>The program AGWTermTCP, which is a front end terminal for AGWPE, would allow us to communicate with the balloon using our proprietary over-the-air command protocol (see Flight Computer). We could also monitor the raw incoming APRS text using this program.</div>
+
+<div>&nbsp;</div>
+
+<div>The displaying of sensor data was more of a problem, and the eventual solution was the writing of our own program using VB, which watches the AGWPE TCP port and then displays all data from the APRS string, including sensor data. It also logs all incoming APRS beacons from the balloon to a text file, and can generate a KML file (Google Earth) from either current or imported log files. The program is called APRS Track and can be downloaded <b style=""><u>here</u></b>, although some of the code is so specific to our project that it probably won&rsquo;t be of any use to anyone else unless you decide to follow the same APRS comment format.</div>
+
+<div>&nbsp;</div>
+
+<div>One tracking laptop was placed in both the car and the minibus, both running from 12VDC-240VAC inverters because their batteries were completely knackered. We also took two other laptops, an Asus EEE PC and a Dell Vostro 1700 for other work and in case we needed to SSH into the flight computer before launch. The Vostro also had a redundant mobile internet connection, in case we should need access to it for any reason.</div>
+
+<div>&nbsp;</div>
+
+<div>The antennas at the receiving end were 446 MHz tuned eggbeaters. They have very good radiation angles and around 6dBi gain, and were attached to the radios with 50ohm RG58 coax cable. We devised simple brackets for the antennas so they could be mounted on top of the vehicles, even during travel.</div>
+
+<p></div>
+<h2><a name="funds">Funding</a></h2>
+<p>Virgin Galactic has very helpfully offered us a large proportion of the project budget in terms of sponsorship, for which we are of course very grateful.</p>
+<h2><a name="launch">The Launch</a></h2>
+<p>Final antenna tuning for the balloon-side eggbeater and final testing of the cutdown device was completed by Friday afternoon. The treble boost filters for the ground side stations were lacquered to prevent damage and to increase ruggedness.</p>
+<p>After spending the majority of Friday getting things ready and loading electronics, antennas, and everything else into the minibus and car, we set off for Stratford-upon-Avon at just after 4 o&rsquo;clock. The journey was uneventful and after arriving, unpacking and eating, the minibus team were given a quick tutorial on the setup of the electronics and the use of APRSPoint for tracking the balloon in the air.</p>
+<p>An early start on Saturday morning saw us at the launch site at the Queen Elizabeth Humanities College in Bromyard by 9:00. Antennas were quickly attached to the top of the car and the minibus, and the helium cylinder was unloaded from the back of the minibus. We flipped the screen on the camera over to turn it off, and inserted the SD card, before powering up the eletronics using the Lithium Thionyl Chloride batteries. The system booted first time, and started beaconing and taking pictures as soon as the GPS got a lock on satellites. The helium and filling equipment were taken onto the field, along with the balloon and parachute. Whilst this was happening, the 433 Mhz set on the payload was powered up and the back of the payload box was sealed shut with glue gun. Filling the balloon started at 10:45 and half an hour later we had tied the balloon up. The car was driven onto the field so we could watch the tracking system and ensure it was seeing the beacons without having to keep running back and forth across the field. The antenna had been attached to the bottom of the payload box, and the payload cords had been tied to the parachute shroud lines and laid out on the ground to prevent them becoming tangled. After tying the balloon to the top of the parachute, we realised that the balloon would not have enough free lift to carry the payload. As such, everything was disassembled and more helium was added to the balloon to increase the weight it could lift. When finished, the parachute was once again tied to the balloon. The camera mount dislodged somewhere in this process, but this took a couple of minutes to fix.</p>
+<p><a href="http://www.hexoc.com/balloon/images/projects-apex-i-fill.jpg"><img width="300" height="201" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-fill.jpg" /></a><a href="http://www.hexoc.com/balloon/images/projects-apex-i-car.jpg"><img width="300" height="201" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-car.jpg" /></a></p>
+<p>It was 11:45 by the time everything was ready to launch again. The payload had been running throughout the process so we could verify everything was working, which it was. Each beacon had come in precisely on time and without fail. Once everything was in the launch position, we waited for three beacons to come in whilst the final flight checks were carried out on the payload and flight string.</p>
+<p>The balloon was released at 11:55 and it ascended very quickly over the rooftops of the college. Our first altitude reading was at 12:13 read 9300ft. We immediately noticed that the GPS was not consistently telling us the altitude &ndash; only one in every five to ten beacons contained an altitude reading. The reasons for this were unknown.</p>
+<p>The balloon headed north, so we jumped in the vehicles and set off after it. By 11:20 it had already passed 12,00ft and was still heading north. It had a good head start, but we followed it North up the A49 towards Shrewsbury. It hit 24,000ft at around 11:45, and then passed over Shrewsbury at 30,000ft at around 13:00, before staying relatively still until 14:00, but still climbing. At 14:08 we received the highest confirmed altitude at 72,549 ft just North of Shawbury. From here, the balloon began to head east very slowly.</p>
+<p>The tracking system in the minibus had been playing up since we left the launch site, and the car station was the only one reliably picking up packets from the balloon. After trying several different things, including a hardware TNC, a change of antenna eventually fixed the problem. The SWR of the minibus eggbeater had jumped to &gt;3. After switching to the helicoidal, the system picked up packets much better.</p>
+<p>Since it had been staying nearly still for more than an hour, we had stopped in a Tesco car park to sit and watch. At 14:17 the final beacon came in before the GPS lost lock on satellites. We expected this to happen, as this particular model is altitude limited. However, we did not expect the balloon to travel very far as wind is almost non-existent at more than 70,000ft. As it happened, the balloon was travelling very fast towards the East. But since the GPS had no lock and we were certainly not expecting this, we did not know this. When the GPS eventually found a lock on satellites again at 14:55, it was more than 140km east, near Grantham. We picked up six beacons from there, which is rather impressive given the distance involved. From the pressure readings, it was evident that the balloon had burst and that the payload had begun its descent to Earth.</p>
+<p>We considered the possibility of the GPS being wrong, and therefore staying where we were until the balloon came down a bit further. However the fact that we had had six beacons, all around the same place, and that the signal was significantly weaker than earlier, convinced us that the GPS was correct and that the payload really was miles away. The very last we heard from the payload was a reading at 15:03 as it headed North again towards Sleaford. From its pressure reading, we estimate this was from an altitude of around 34,000ft.</p>
+<p>We jumped back in the vehicles and sped towards Grantham as fast as possible, but even though we had tracking equipment running in both vehicles during the entire journey, we did not receive any more radio beacons from the payload. By the time we reached Grantham, the airwaves were still completely silent. We drove around a bit in the car whilst the minibus caught us up, around Newton and Haceby, but we still could not hear anything. Either we were just too far away from the payload, as we didn&rsquo;t have an accurate enough idea of where it was, or the payload was damaged on impact and stopped transmitting. In this case, it could have been on the other side of a hedge and we would still not have noticed it.</p>
+<p>By this point it was getting late, and at around 17:30 we decided we had to give up the search, as a three hour drive back to Surrey was required to get home. We eventually got home after 22:00. At the time of writing, we have still not found or recovered the payload. It has contact telephone numbers and the promise of a reward on its side, so hopefully someone will come across it and return it sooner or later, although hopefully sooner.</p>
+<p><a href="http://www.hexoc.com/balloon/images/projects-apex-i-mp.jpg"><img width="600" height="325" border="0" alt="" src="http://www.hexoc.com/balloon/images/projects-apex-i-mp.jpg" /></a></p>
+<h2><a name="team">Team</a></h2>
+<div class="level2">&nbsp;Leaders</div>
+<div class="level5">
+<ul>
+    <li class="level1">
+    <div class="li">Jon Sowman</div>
+    </li>
+    <li class="level1">
+    <div class="li">Ben Oxley</div>
+    </li>
+    <li class="level1">
+    <div class="li">Matthew Brejza</div>
+    </li>
+</ul>
+</div>
+<h5>Members</h5>
+<div class="level5">
+<ul>
+    <li class="level1">
+    <div class="li">Richard Morris</div>
+    </li>
+    <li class="level1">
+    <div class="li">Andrew Cowan</div>
+    </li>
+    <li class="level1">
+    <div class="li">Edmund Mottershead</div>
+    </li>
+    <li class="level1">
+    <div class="li">Michael Georgiou</div>
+    </li>
+    <li class="level1">
+    <div class="li">Sam Gardner</div>
+    </li>
+</ul>
+</div>
+<h5>Staff</h5>
+<div class="level5">
+<ul>
+    <li class="level1">
+    <div class="li">J. Costello</div>
+    </li>
+    <li class="level1">
+    <div class="li">R. Turner</div>
+    </li>
+    <li class="level1">
+    <div class="no">P. Davis</div>
+    </li>
+</ul>
+</div>
+<h2><a name="other_links">Other Links</a></h2>
+<div class="level2">
+<ul>
+    <li><a rel="nofollow" title="http://balloon.hexoc.com" href="http://wiki.ukhas.org.uk/projects:apex-i">Apex I UKHAS Page</a></li>
+    <li><a rel="nofollow" title="http://www.hexoc.com/balloon/gallery" href="http://apex.hexoc.com/gallery/">Project Photo Gallery</a></li>
+</ul>
+</div>
+<p>&nbsp;</p></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

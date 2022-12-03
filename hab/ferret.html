@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Ferret Tracker | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="ferret">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li class="active"><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/hab">Hab</a>
+<span class="separator">/</span></li>
+<li class="active">
+Ferret Tracker
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">HAB Projects</li>
+
+
+
+
+<li class="active"><a href="/hab/ferret.html">Ferret</a></li><li><a href="/hab/joey.html">Joey</a></li>
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Ferret</h1>
+
+<p><hr />
+<p><strong>Hackaday - [</strong><a
+    href="http://hackaday.com/2010/03/17/arduino-balloon-tracking/"
+    target="_blank"><strong>link</strong></a><strong>]</strong></p>
+<p><strong>Code - [<a href="http://github.com/jonsowman/ferret" target="_blank">github</a>]</strong></p>
+<p>Ferret was a quick high altitude balloon tracker knocked up in an afternoon for a balloon launch (Project Orion) launched on 07/03/10 from Churchill College, Cambridge.</p>
+<p>Credit goes to Iain at <a href="http://www.cusf.co.uk"
+    target="_blank">CUSF</a> for original code and hardware design.</p>
+<h3>Design</h3>
+<p>The main payload contained only GSM tracking systems and no other in-flight tracking, hence the need for a quick and simple RF tracker.</p>
+<p>This consisted of an Arduino board with an EM-406a GPS and Radiometrix NTX2 narrowband FM module. The arduino simply parsed the NMEA sentences output from the GPS unit and formatted them into a string to be transmitted over the radio. The broadcast frequency was 434.650MHz and many people tuned in to help track the balloon.</p>
+<p>Power was supplied by 4xAA Energiser Lithium cells regulated to 5V by the onboard Arduino regulator (also provided some amount of heat).</p>
+<p>The ferret was simply strapped to the outside of the main payload and covered in foam for some thermal and moisture protection. The very low frequency drift of the radio during flight indicates that covering the payload in foam was thermally adequate.</p>
+<h3>GPS</h3>
+<p>The GPS of choice was an EM-406a, simply because that is what we had lying around the lab at the time. This GPS is very good at getting a lock quickly and also has an inbuilt RTC which is useful as it can keep time even when the GPS loses lock on satellites, eliminating the need for a seperate onboard RTC.</p>
+<p>The downside of this unit is that it cuts out at 24km altitude, but this is not too much of an issue for a basic tracker. During the time the balloon is above 24km, a directional antenna such as a Yagi is sufficient to keep a track of it. As soon as the payload drops below 24km on descent, the GPS regains a lock and the descent can be tracked and the landing spot thereby predicted and located.</p>
+<h3>Radio</h3>
+<p>The arduino had one pair of PWM pins set to 64kHz frequency and two values were used to emulate serial between 2V and 2V2 into the NTX2 TXD pin. From the ground, listening to AM-SSB USB at the radio frequency produces tones which are then fed into a computer running dl-fldigi to decode them.</p>
+<p>The packet format was consistent with <a href="http://ukhas.org.uk/communication:protocol">UKHAS specification</a> and clients ran dl-fldigi to decode the 50 baud RTTY from the balloon and upload it to the central web tracker at <a href="http://spacenear.us/tracker">spacenear.us/tracker</a>. The checksum was a CRC16 one, implemented on the arduino using an existing software library.</p>
+<p>A sample packet follows:</p>
+<p>$$ORION,463,11:05:27,52.2109,0.0815,860,8*A963</p>
+<h3>Antenna</h3>
+<p>The antenna was constructed in about half an hour using a small piece of copper-clad PCB with a hole drilled into it and some RG-174 coax cable. The basic design was a 1/4 wave whip with radials.</p>
+<p>The RF output from the radio was connected to the central driven element with the coax braid being connected to the RF GND at the radio end and the copper on the PCB (and then to the radials) at the antenna end - see pictures.</p>
+<p>Electrical tape was used to keep water from coming into contact with the connections on the antenna, and plastic drinking straws to keep the radials and driven element straight.</p>
+<h3>Pictures</h3>
+<p>&nbsp;<img alt="" src="http://farm3.static.flickr.com/2684/4414038838_df9e5cd2fc.jpg" /></p>
+<p><img alt="" src="http://farm3.static.flickr.com/2749/4414039650_e30c16dcf1.jpg" /></p>
+<p><img alt="" src="http://farm3.static.flickr.com/2725/4414040518_16f001f3ae.jpg" /></p>
+<p><img alt="" src="http://farm5.static.flickr.com/4038/4414039114_7fdb7eaaa4.jpg" /></p>
+<p><img alt="" src="http://farm3.static.flickr.com/2786/4413273403_d8d9216f11.jpg" /></p>
+<object height="340" width="560">
+<param value="http://www.youtube.com/v/PtUjGdgMFOU&amp;hl=en_GB&amp;fs=1&amp;" name="movie" />
+<param value="true" name="allowFullScreen" />
+<param value="always" name="allowscriptaccess" /><embed type="application/x-shockwave-flash" height="340" width="560" allowfullscreen="true" allowscriptaccess="always" src="http://www.youtube.com/v/PtUjGdgMFOU&amp;hl=en_GB&amp;fs=1&amp;"></embed></object>
+<p><em>Thanks to everyone who helped with the launch and recovery.</em></p></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

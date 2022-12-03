@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Ultrasound Ranger | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="ultrasound">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li class="active"><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/electronics">Electronics</a>
+<span class="separator">/</span></li>
+<li class="active">
+Ultrasound Ranger
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">Electronics Projects</li>
+
+<li class="active"><a href="/electronics/ultrasound.html">Ultrasound Ranger</a></li><li><a href="/electronics/altimeter.html">Altitude Logger</a></li><li><a href="/electronics/spirit_level.html">Digital Spirit Level</a></li><li><a href="/electronics/ukhasnet.html">UKHASnet</a></li>
+
+
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Ultrasound Distance Ranger</h1>
+
+<p><hr />
+<p>This system was designed to be pointed at something, and it then tell you
+how far away it was. This type of device is often used by surveyors: newer ones
+use lasers. However these are very complex and well beyond the scope of my
+electronics abilities!</p>
+<p>As such, ultrasound is the traditional method of finding distance. The
+concept behind it is extremely simple: one can determine the speed of sound in
+air (~340m/s) and by timing the gap between a pulse of sound being sent, and it
+being received after being reflected, one can determine the distance travelled
+there and back, using <em>s=vt</em>. Divide this by two, and voila!</p>
+<p><a href="#tx">Transmitter</a></p>
+<p><a href="#rx">Receiver</a></p>
+<p><a href="#cs">Control System</a></p>
+<p><a href="#pic">Testing &amp; Pictures</a></p>
+<p><a href="#pcode">PICAXE Code</a></p>
+<h4><strong><a name="tx"></a>Transmitter</strong></h4>
+<p>The transmitter is the simplest part of the system: it is required to send a
+given-length pulse of ultrasound when instructed.</p>
+<p><img alt="" src="/media/images/DSC03084.JPG" /></p>
+<p><img width="640" height="337" alt=""
+src="/media/images/trans_schem.jpg" /></p>
+<p>The transmitter system is a simple 555 timer circuit. The output on pin 3 is
+attached to a transistor. When the base goes high, current is allowed to flow
+from the +9V power supply, through the 560&Omega; protective resistor and then
+through the 40kHz ultrasonic transducer, to ground. <br />
+&nbsp;<br />
+Pin 4 (ping) is a reset and whilst kept low, the timer is disabled. A
+microcontroller or logic of some sort needs to be attached to this pin to send
+a precise 200uS high pulse. During this 200uS, the 555 timer will emit pulses
+at 40kHz, which drives the transducer. <br />
+&nbsp;<br />
+Along pin 3 there is a point marked frequency test. Connecting a frequency
+calibration device or an oscilloscope between this point and ground will allow
+calibrating the 555 frequency to exactly 40kHz, by means of the 10k&Omega;
+variable resistor.</p>
+<h4><strong><a name="rx"></a>Receiver</strong></h4>
+<p><strong><img alt="" src="/media/images/DSC03083.JPG"
+    /></strong></p>
+<p><img width="640" height="261" alt=""
+src="/media/images/rec_schem.jpg" /></p>
+<p>This circuit diagram shows the receiving part of the ultrasound system. It
+is split into two sections, each doing a part of the <br />
+processing of echoes, before eventually passing the signal on to a
+microcontroller or other logic system for measurement of time <br />
+lag via the &ldquo;echo&rdquo; output. <br />
+&nbsp;<br />
+<strong>Amplification </strong><br />
+&nbsp;<br />
+When the 40kHz ultrasonic transducer picks up the signal, it is extremely weak.
+Before any processing can be completed on the signal, it must be amplified.
+This is done by means of a LM741 &ndash; an operational amplifier. This IC has
+a gain of 1000, ie. It multiplies the difference in voltage between the two
+inputs (pin 2 and 3) by 1000. Therefore the small voltage created by the
+ultrasonic transducer is amplified by 1000 so that the tone decoder can pick up
+the signal. <br />
+&nbsp;<br />
+<strong>Tone Decoding </strong><br />
+&nbsp;<br />
+The transducer will pick up most sounds within a fairly wide range. To make
+sure the system only picks up the ultrasound signal that was transmitted, we
+need to lock the receiver onto a certain frequency. This is done by the use of
+the LM567CN Phase Locked Loop Tone Decoder IC. The chip has a 555 timer built
+into it which is used to set a reference frequency. The &ldquo;frequency
+test&rdquo; pin can be connected to an oscilloscope to set the reference
+frequency to 40kHz. After this, when a signal at 40kHz is applied to the input
+(pin 3), the voltage at pin 8 will drop LOW. When any other frequency signal,
+or no signal, is applied to the input pin, the voltage at the output pin will
+stay high. <br />
+&nbsp;<br />
+<strong>False Triggering </strong><br />
+&nbsp;<br />
+The returning signal will be very dirty and so a system needs to be put in
+place to make sure that the timing circuit &ldquo;sees&rdquo; the very first
+echo, even if it is very weak. Without any amplification or re-processing, this
+first signal may not be of a high enough voltage for the timer circuit to
+&ldquo;see&rdquo; it as high, and it will miss it. Therefore an LM311 voltage
+comparator will be attached to the output of the LM567CN Tone Decoder. A
+reference voltage can then be set, so if that a signal is above a set
+threshold, instead of outputting a weak signal to the timing circuits, the
+receiver will output a full 7V high signal. In this way, it can be ensured that
+the timing circuit does not miss the first returning signal, even if it is very
+weak.</p>
+<h4><strong><a name="cs"></a>Control System</strong></h4>
+<p><strong><img alt="" src="/media/images/DSC03082.JPG"
+    /></strong></p>
+<p><strong><img alt="" src="/media/images/ctrl_schem.jpg"
+    /></strong></p>
+<p>As this device is designed to be a distance sensor, there needs to be a
+control system in place. This system will: <br />
+&nbsp;<br />
+1)&nbsp; Send an accurately timed pulse to the 555 timer. The timer will then
+emit the 40kHz pulse for this amount of time. <br />
+2)&nbsp; Once the pulse emission has finished, the control system will begin
+timing. <br />
+3)&nbsp; On the first echo received, the system will stop the timing. <br />
+4)&nbsp; From length of recorded time, the system should be able to determine
+the distance in real world units (for example centimetres). <br />
+&nbsp;<br />
+The PICAXE ICs are suitable for this, in that they can send accurately timed
+pulses and perform the mathematical calculations which will be needed to work
+out the real world distance from the pulse length. <br />
+&nbsp;<br />
+The disadvantage is that the PICAXE chips have no accurate or reliable method
+to measure a length of time. The only way to do this is via the &bdquo;pulsin‟
+command. Even running overclocked to 8mHz, a PICAXE will not &ldquo;see&rdquo;
+a pin go HIGH or LOW quick enough for the timing to be accurate. <br />
+&nbsp;<br />
+Therefore attaching the &ldquo;echo&rdquo; line directly to a PICAXE is not
+possible. So an alternative method needs to be found using the &bdquo;pulsin‟
+method. This command measures the length of a pulse on a certain pin. This can
+start on a LOW-&gt;HIGH transition and finish on a HIGH-&gt;LOW transition, or
+vice versa. <br />
+&nbsp;<br />
+The ping (output to the 555 timer) line is low by default, and will go high for
+a set amount of time, to send the 40kHz pulse. The echo line is high by
+default, and will go low when an echo is received. For use of the &quot;pulsin‟
+command, the two lines need to be combined. However, this cannot be done, as a
+default high and a default low will just create a short circuit. Because of
+this, the echo line will need to be inverted by the use of a logic system. In
+addition, both lines will need diodes to prevent damage by current from one
+line flowing up the other line.</p>
+<p><br />
+When a signal is received, the echo line drops low. The echo line is then
+pulled high through the resistor. This LOW-&gt;HIGH transition is used to end
+the timing pulse, having been started by the HIGH-&gt;LOW transition at the end
+of the &ldquo;ping&rdquo; pulse.&nbsp; The amount of elapsed time is then
+recorded as a value in the second PICAXE chip. At the stock speed of 4MHz, the
+time is measured in 10uS units.&nbsp;&nbsp;</p>
+<p><strong>Overclocking </strong><br />
+&nbsp;<br />
+As mentioned earlier, the PICAXE ICs can be &ldquo;overclocked&rdquo; to run at
+twice their default speed (to 8MHz from 4MHz). Some can be overclocked to
+16MHz, but these do not include the PICAXE-08M chips that I will be
+using.&nbsp; The reason for overclocking the chip is as follows: each command
+the PICAXE processor completes takes a set amount of time. Unlike a PICmicro or
+similar PIC device programmed in machine code, the BASIC coding used for the
+PICAXE chips is far less efficient. <br />
+&nbsp;<br />
+If we take the following code as an example: <br />
+&nbsp;<br />
+<em>do while pin1=0 X <br />
+    Y loop <br />
+    goto setValue </em><br />
+&nbsp;<br />
+This code loops around in a circle until pin 1 goes high. When it does, it
+jumps to the function called &ldquo;setValue&rdquo;. If the pin goes high at
+point X, it will take less time for the PICAXE to move its processing cursor to
+the function &ldquo;setValue&rdquo; than if the pin goes high at point Y. The
+time difference is extremely small, but when working with ultrasound pulses
+that are in themselves only microseconds long, <br />
+this tiny inaccuracy in &ldquo;seeing&rdquo; a pin change state can cause a
+considerable inaccuracy in end result. <br />
+&nbsp;<br />
+This is where overclocking comes in. By doubling the PICAXEs clock speed, the
+processing speed is doubled. Therefore the &ldquo;check&rdquo; for a high pin
+will happen twice as many times per unit time as when running at default speed.
+The upshot of which is that the accuracy is doubled.</p>
+<h4><a name="pic">Testing &amp; Pictures</a></h4>
+<p><img alt="" src="/media/images/DSC03214.JPG" /></p>
+<p><img alt="" src="/media/images/DSC03222.JPG" /></p>
+<p><img alt="" src="/media/images/DSC03331.JPG" /></p>
+<p><img alt="" src="/media/images/DSC03328.JPG" /></p>
+<h4><a name="pcode">PICAXE Code</a></h4>
+<p>Please click <a href="/media/USPICPRGS-JS.zip">here
+</a>to download a ZIP file containing the *.bas PICAXE programs for the two
+PICAXE-08M chips on the control board. The one with &quot;pic2&quot; in the
+name is the one for the timing PIC (the one attached to the LCD screen). The
+one with &quot;pic1&quot; is, therefore, the one for the transmitter control
+PIC.</p></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

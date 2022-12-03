@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Altimeter Datalogger | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="altimeter">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li class="active"><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/electronics">Electronics</a>
+<span class="separator">/</span></li>
+<li class="active">
+Altimeter Datalogger
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">Electronics Projects</li>
+
+<li><a href="/electronics/ultrasound.html">Ultrasound Ranger</a></li><li class="active"><a href="/electronics/altimeter.html">Altitude Logger</a></li><li><a href="/electronics/spirit_level.html">Digital Spirit Level</a></li><li><a href="/electronics/ukhasnet.html">UKHASnet</a></li>
+
+
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Altimeter Datalogger</h1>
+
+<p><hr />
+<a name="top"></a></span></b></p>
+<p class="MsoNormal"><a href="#tx"><strong>Transmitter Pictures, PCB &amp; Schematic</strong></a></p>
+<p class="MsoNormal"><a href="#rx"><strong>Receiver Pictures &amp; Schematic</strong></a></p>
+<p class="MsoNormal"><a href="#cd"><strong>PICAXE Code&nbsp;</strong></a></p>
+<p class="MsoNormal"><b><br />
+</b>The general aim of this project was to find a relatively cheap and reliable altitude remote datalogging system for a model rocket.</p>
+<p class="MsoNormal">The system that I came up with is outlined below along with photographs. At the bottom you can find the complete circuit schematics for the transmitter and receiver, along with the corresponding PICAXE code for the two parts.</p>
+<p class="MsoNormal"><b>Sensor<br />
+</b>I decided to go for the altitude sensor approach, largely because it&rsquo;s cheaper than using an accelerometer. And whilst it required more time to get it working as it should and getting a useable signal from it, that was half the challenge. The sensor I picked was the Motorola MPX4115A.</p>
+<p class="MsoNormal"><b>Signal Conditioning<br />
+</b>This sensor is used for pressures between 0 &ndash; 115 kPa. Bearing in mind mean atmospheric pressure at sea level is 101kPa, and drops to about 84kPa at around 5000 feet, we need to narrow the range down considerably. I chose 5000feet as the maximum for this project, as it gives me a reasonable range (not that a rocket is ever going to reach 5000feet) whilst giving me a resolution of about 5 feet. A differential amplifier using the MAX494 quad rail-to-rail op-amp was used for this.</p>
+<p class="MsoNormal"><b>Processing<br />
+</b>The signal, after conditioning, is fed into a PICAXE 18X microcontroller which reads the analogue signal into a 10bit ADC. The value is then transmitted back to the receiver station over a 433mHz RF link.</p>
+<p class="MsoNormal">In addition, the 18X does other things:</p>
+<p class="MsoListParagraph" style="text-indent: -18pt;"><span style="font-family: Symbol;">&middot;</span><span style="font-size: 7pt; line-height: 115%; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>After every single reading, it checks to see if this reading is the new peak altitude (ADC value lower than previous &ndash; as voltage falls with increasing altitude). It logs the peak altitude in its internal EEPROM.</p>
+<p class="MsoListParagraph" style="text-indent: -18pt;"><span style="font-family: Symbol;">&middot;</span><span style="font-size: 7pt; line-height: 115%; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>It records a &ldquo;zero&rdquo; value at the beginning of each flight. When transferred to a computer, this &ldquo;zero&rdquo; value can be taken away from subsequent readings. As such, it eliminates the problem of changing atmospheric pressure between flights.</p>
+<p class="MsoListParagraph" style="text-indent: -18pt;"><span style="font-family: Symbol;">&middot;</span><span style="font-size: 7pt; line-height: 115%; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>One in every 10 or 20 (depending on log time) readings is logged to internal EEPROM as well as being sent over RF. This is so that, in the event of the receiver failing, huge amounts of interference, etc, some data from the flight is still available from the onboard device.</p>
+<p class="MsoNormal"><b>Transmission<br />
+</b>A cheap (&pound;10) 433mHz pair of RF modules were used for this. There&rsquo;s not much to say &ndash; they work perfectly sending serial data directly through them. I found N1200 was the fastest baud I could use whilst getting nearly perfect signal over around 80-90m range. At N2400 baud, the range decreased to around 50m &ndash; the time saving of doubling the baud was not worth the loss in range.</p>
+<p class="MsoNormal">Note: I used a full wavelength whip antenna at the time for this project. I later discovered&nbsp; 5/8 wavelength whip is far better. If this is too long, a 1/4 wavelength whip will still give better results than a full wavelength one.</p>
+<p class="MsoNormal"><b>Receiver<br />
+</b>The receiver is not very interesting &ndash; at least not as much as the transmitter. When switched on, it waits for a &ldquo;start logging&rdquo; command from the transmitter. Once received, it waits for the beginning of the data stream. It takes each reading, makes sure it is 1023 or below (because it is only 10bit ADC, any higher values MUST be interference). There is no parity or CRC, as this technique of &ldquo;1023 or less&rdquo; catches 99% of errors, after extensive testing! The data is then logged to a 24LC256 EEPROM. When required, the data can be read back to a computer; either in plain text, or in SelmaDAQ mode. This puts the data directly into Microsoft Excel so a graph can be plotted, and other calculations performed on the raw results.</p>
+<p class="MsoNormal"><b>Power<br />
+</b>The transmitter is simply powered by two 3V lithium coin cells, providing 6V to the MAX883 regulator. When switched on, the PICAXE takes control of the &ldquo;shutdown&rdquo; pin on the regulator, keeping it high. This keeps the regulator running and supplying power to the PICAXE and the rest of the components. When finished logging (or its current task) the PICAXE sends the leg low, shutting off the circuit completely. As such, should the rocket land on a roof, or in a tree, the batteries will not run themselves down. Standby current is around 7 microamps. Idle current is 10mA, and transmitting data (ie. Peak power usage) is 17mA. As such, around 6 hours TOTAL run time can be expected from the two coin cells.</p>
+<div style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color windowtext; border-width: medium medium 1pt; padding: 0cm 0cm 1pt;">
+<p class="MsoNormal" style="border: medium none; padding: 0cm;"><b>Internal Data<br />
+</b>After a flight, the transmitter can be powered up along with the receiver, and a button on the transmitter sends its internal data to the receiver (ie. &ldquo;zero&rdquo; value, peak reading and one in every 10/20 readings), which the receiver logs to a second 24LC256. This data is returned to the computer in both plain text and SelmaDAQ modes.</p>
+<p class="MsoNormal" style="border: medium none; padding: 0cm;"><o:p>&nbsp;[<a href="#top">top</a>]</o:p></p>
+</div>
+<p class="MsoNormal"><b style=""><span style="font-size: 16pt; line-height: 115%;">Results<o:p></o:p></span></b></p>
+<p class="MsoNormal">&nbsp;<span style=""><!--[if gte vml 1]><v:shapetype
+id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+<v:stroke joinstyle="miter" />
+<v:formulas>
+<v:f eqn="if lineDrawn pixelLineWidth 0" />
+<v:f eqn="sum @0 1 0" />
+<v:f eqn="sum 0 0 @1" />
+<v:f eqn="prod @2 1 2" />
+<v:f eqn="prod @3 21600 pixelWidth" />
+<v:f eqn="prod @3 21600 pixelHeight" />
+<v:f eqn="sum @0 0 1" />
+<v:f eqn="prod @6 1 2" />
+<v:f eqn="prod @7 21600 pixelWidth" />
+<v:f eqn="sum @8 21600 0" />
+<v:f eqn="prod @7 21600 pixelHeight" />
+<v:f eqn="sum @10 21600 0" />
+</v:formulas>
+<v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect" />
+<o:lock v:ext="edit" aspectratio="t" />
+</v:shapetype><v:shape id="Picture_x0020_2" o:spid="_x0000_i1026" type="#_x0000_t75"
+alt="flightlog" style='width:612.75pt;height:297pt;visibility:visible;
+mso-wrap-style:square'>
+<v:imagedata src="index_files/image001.jpg" o:title="flightlog" />
+</v:shape><![endif]--><!--[if !vml]--><img width="640" height="396" border="0"
+alt="flightlog" v:shapes="Picture_x0020_2" src="/media/images/altimeterf1.jpg" /><!--[endif]--></span><br />
+<i style="">This screenshot shows data from a full rocket launch. The pressure was set at 2.5Bar. By taking away the &ldquo;peak&rdquo; value from the &ldquo;zero&rdquo; value and multiplying by the resolution in feet, the peak height can be determined (66 feet in this flight). The flight itself can be clearly discerned from the graph.<o:p></o:p></i></p>
+<p class="MsoNormal"><b style=""><span style="font-size: 16pt; line-height: 115%;"><o:p>&nbsp;</o:p></span></b></p>
+<p class="MsoNormal"><span style=""><!--[if gte vml 1]><v:shape
+id="Picture_x0020_3" o:spid="_x0000_i1025" type="#_x0000_t75" alt="image001"
+style='width:612pt;height:389.25pt;visibility:visible;mso-wrap-style:square'>
+<v:imagedata src="index_files/image003.jpg" o:title="image001" />
+</v:shape><![endif]--><!--[if !vml]--><img width="640" height="519" border="0"
+alt="image001" v:shapes="Picture_x0020_3" src="/media/images/altimeterf2.jpg" /><!--[endif]--></span><br />
+<i style="">This screenshot was the data from a 35 second &ldquo;flight&rdquo;. I actually threw the module into the air three times during these 35 seconds. Looking at the graph, you can see this clearly. Please ignore the spike at the very end.<o:p></o:p></i></p>
+<div style="border-style: none none solid; border-color: -moz-use-text-color -moz-use-text-color windowtext; border-width: medium medium 1.5pt; padding: 0cm 0cm 1pt;">
+<p class="MsoNormal"><o:p>&nbsp;</o:p> [<a href="#top">top</a>]</p>
+<hr />
+<div class="Section1">
+<p class="MsoNormal"><a name="tx"><b><span style="font-size: 16pt; line-height: 115%;">Transmitter Module</span></b></a></p>
+<p class="MsoNormal"><b style=""><span style=""><img id="_x0000_i1032" alt="" src="http://farm3.static.flickr.com/2783/4103723087_bf0058bebf_z.jpg?zz=1" /></span></b><br />
+Here you can see the two coin cells on the left, held together with electrical tape and a paper clip. In the middle, the RF transmitter, with the purple antenna lead. On the right, the MPX4115A pressure sensor.</p>
+<p class="MsoNormal"><span style=""><img id="_x0000_i1031" alt="" src="http://farm3.static.flickr.com/2774/4103722819_e8ed5c4587_z.jpg?zz=1" /></span><br />
+The top side of the PCB, showing the two status LEDs. The pot is the calibration for the differential amplifier. Beneath it is the MAX494. Under the black foam lies the MAX883 regulator along with the PICAXE 18X. On the far left, the coil of purple wire is the 61.3cm antenna (one 433.92mHz wavelength).</p>
+<p class="MsoNormal">The blue jumper in the middle of the board, next to the pot and LEDs, is &ldquo;automatic mode&rdquo;. In manual mode, you must press a button to take the &ldquo;zero&rdquo; reading, test the connection, then again to start logging. In automatic mode, a &ldquo;zero&rdquo; reading is taken, the system enters &ldquo;testing connection&rdquo; mode for 30 seconds. After this, the system logs for the programmed amount of time (I usually set this at 45 seconds). After this, it shuts down.</p>
+<p class="MsoNormal"><span style=""><img id="_x0000_i1030" alt="" src="http://farm3.static.flickr.com/2538/4104485102_1110c85426_z.jpg?zz=1" /></span><br />
+The three buttons on the board are located in the top left of the PCB in this picture. From left to right:<br />
+1) Slightly hidden under the power lead &ndash; POWER. Pressing this allows power to the MAX883 and the circuit powers up, after which the PICAXE takes control of the power.<br />
+2) Test connection/start log/stop log. In automatic mode, can be used to stop manually logging.<br />
+3) Transmit internal data &ndash; returns the 18X&rsquo;s internal data to the receiver via RF.</p>
+<p class="MsoNormal"><span style=""><img id="_x0000_i1029" alt="" src="http://farm3.static.flickr.com/2543/4104485360_0bd57c182d_z.jpg?zz=1" /></span><br />
+The module. The PICAXE and regulator can be seen on the topside under the foam. The three pin header at the front, with the blue jumper, is a connection for the PICAXE download socket.</p>
+<p class="MsoNormal"><span style=""><img id="_x0000_i1028" alt="" src="http://farm3.static.flickr.com/2738/4104484918_e2edca8aa2_z.jpg?zz=1" /></span><br />
+The completed module sealed and ready for flight &ndash; one end is permanently sealed; the other is masking taped shut once the system is running and ready to fly.</p>
+<p class="MsoNormal"><span style=""><!--[if gte vml 1]><v:shapetype
+id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+<v:stroke joinstyle="miter" />
+<v:formulas>
+<v:f eqn="if lineDrawn pixelLineWidth 0" />
+<v:f eqn="sum @0 1 0" />
+<v:f eqn="sum 0 0 @1" />
+<v:f eqn="prod @2 1 2" />
+<v:f eqn="prod @3 21600 pixelWidth" />
+<v:f eqn="prod @3 21600 pixelHeight" />
+<v:f eqn="sum @0 0 1" />
+<v:f eqn="prod @6 1 2" />
+<v:f eqn="prod @7 21600 pixelWidth" />
+<v:f eqn="sum @8 21600 0" />
+<v:f eqn="prod @7 21600 pixelHeight" />
+<v:f eqn="sum @10 21600 0" />
+</v:formulas>
+<v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect" />
+<o:lock v:ext="edit" aspectratio="t" />
+</v:shapetype><v:shape id="Picture_x0020_8" o:spid="_x0000_i1027" type="#_x0000_t75"
+style='width:600pt;height:335.25pt;visibility:visible;mso-wrap-style:square'>
+<v:imagedata src="tx_files/image001.png" o:title="" croptop="17358f"
+cropbottom="19534f" cropleft="9571f" cropright="14923f" />
+</v:shape><![endif]--><!--[if !vml]--><img width="640" height="447"
+v:shapes="Picture_x0020_8" alt="" src="/media/images/altimeter/tx002.jpg" /><!--[endif]--></span></p>
+<p class="MsoNormal">Full transmitter circuit schematic is shown here. <br />
+Sensor port (from left to right)<span style="">&nbsp; </span><span style="">&nbsp;</span>-<span style="">&nbsp; </span><span style="">&nbsp;</span>+5V, <span style="">&nbsp;</span>Signal, <span style="">&nbsp;</span>GND<br />
+Transmitter port (top to bottom)<span style="">&nbsp; </span><span style="">&nbsp;</span>-<span style="">&nbsp; </span><span style="">&nbsp;</span>+5V, Signal, GND<br />
+Serial Download Port (from left to right)<span style="">&nbsp; </span><span style="">&nbsp;</span>-<span style="">&nbsp; </span><span style="">&nbsp;</span>Serial In, Serial Out, GND<span style="">&nbsp; </span><i style="">(Remember that required download resistors are not included in this schematic)<o:p></o:p></i></p>
+<p class="MsoNormal"><span style=""><img width="568" height="230"
+    id="_x0000_i1026" alt="" src="/media/images/altimeter/txpcb.jpg" /></span><br />
+Design for the transmitter PCB.</p>
+<p class="MsoNormal"><span style=""><img width="539" height="430"
+    id="_x0000_i1025" alt="" src="/media/images/altimeter/reg.jpg" /></span><br />
+Schematic for allowing the PICAXE to control its own power via the MAX883 5V LDO regulator.</p>
+<p class="MsoNormal">&nbsp; [<a href="#top">top</a>]</p>
+<hr />
+<p class="MsoNormal">&nbsp;</p>
+<div class="Section1">
+<p class="MsoNormal"><b style=""><span style="font-size: 16pt; line-height: 115%;"><a name="rx">Receiver Module</a><o:p></o:p></span></b></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><!--[if gte vml 1]><v:shapetype
+id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+<v:stroke joinstyle="miter" />
+<v:formulas>
+<v:f eqn="if lineDrawn pixelLineWidth 0" />
+<v:f eqn="sum @0 1 0" />
+<v:f eqn="sum 0 0 @1" />
+<v:f eqn="prod @2 1 2" />
+<v:f eqn="prod @3 21600 pixelWidth" />
+<v:f eqn="prod @3 21600 pixelHeight" />
+<v:f eqn="sum @0 0 1" />
+<v:f eqn="prod @6 1 2" />
+<v:f eqn="prod @7 21600 pixelWidth" />
+<v:f eqn="sum @8 21600 0" />
+<v:f eqn="prod @7 21600 pixelHeight" />
+<v:f eqn="sum @10 21600 0" />
+</v:formulas>
+<v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect" />
+<o:lock v:ext="edit" aspectratio="t" />
+</v:shapetype><v:shape id="Picture_x0020_4" o:spid="_x0000_i1029" type="#_x0000_t75"
+alt="IMG_1396" style='width:409.5pt;height:307.5pt;visibility:visible;
+mso-wrap-style:square'>
+<v:imagedata src="/media/images/altimeter/image001.jpg" o:title="IMG_1396" />
+</v:shape><![endif]--><!--[if !vml]--><img width="546" height="410"
+v:shapes="Picture_x0020_4" alt="IMG_1396"
+src="/media/images/altimeter/image002.jpg" /><!--[endif]--></span><span style="font-size: 12pt; line-height: 115%;"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;">The receiver circuit on breadboard. A standard 433mHz antenna is in use.</span><span style="font-size: 12pt; line-height: 115%;"> <o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><!--[if gte vml 1]><v:shape
+id="Picture_x0020_5" o:spid="_x0000_i1028" type="#_x0000_t75" alt="IMG_1397"
+style='width:409.5pt;height:307.5pt;visibility:visible;mso-wrap-style:square'>
+<v:imagedata src="/media/images/altimeter/image003.jpg" o:title="IMG_1397" />
+</v:shape><![endif]--><!--[if !vml]--><img width="546" height="410"
+v:shapes="Picture_x0020_5" alt="IMG_1397"
+src="/media/images/altimeter/image004.jpg" /><!--[endif]--></span><span style="font-size: 12pt; line-height: 115%;"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;">The PICAXE 28X1 IC can be seen here, along with the dual 24LC256 EEPROMs and a dip switch bank.<br />
+The circuitry on the far left of the board is the 5V regulator circuit.</span><span style="font-size: 12pt; line-height: 115%;"> <o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><!--[if gte vml 1]><v:shape
+id="Picture_x0020_7" o:spid="_x0000_i1027" type="#_x0000_t75" alt="DSCF0694"
+style='width:411.75pt;height:309pt;visibility:visible;mso-wrap-style:square'>
+<v:imagedata src="/media/images/altimeter/image005.jpg" o:title="DSCF0694" />
+</v:shape><![endif]--><!--[if !vml]--><img width="549" height="412"
+v:shapes="Picture_x0020_7" alt="DSCF0694"
+src="/media/images/altimeter/image006.jpg" /><!--[endif]--><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;">The final receiver built into a standard plastic box. The antenna is removable for storage in order to prevent damage.<br />
+The two status LEDs can be seen in the top left, with the red PICAXE reset button in the bottom left.<br />
+The two mode switches are located in the bottom right. The first sets LOG or PLAYBACK modes, the second determines PLAINTEXT or SELMADAQ playback.</span><span style="font-size: 12pt; line-height: 115%;"> <o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><!--[if gte vml 1]><v:shape
+id="Picture_x0020_6" o:spid="_x0000_i1026" type="#_x0000_t75" alt="DSCF0688"
+style='width:408.75pt;height:331.5pt;visibility:visible;mso-wrap-style:square'>
+<v:imagedata src="/media/images/altimeter/image007.jpg" o:title="DSCF0688" croptop="7932f"
+cropbottom="3539f" cropleft="10251f" cropright="5492f" />
+</v:shape><![endif]--><!--[if !vml]--><img width="545" height="442"
+v:shapes="Picture_x0020_6" alt="DSCF0688"
+src="/media/images/altimeter/image008.jpg" /><!--[endif]--></span><span style="font-size: 12pt; line-height: 115%;"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;">The serial download port can be seen on the side of the box here.<o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><!--[if gte vml 1]><v:shape
+id="Picture_x0020_1" o:spid="_x0000_i1025" type="#_x0000_t75" style='width:369.75pt;
+height:129.75pt;visibility:visible;mso-wrap-style:square'>
+<v:imagedata src="/media/images/altimeter/image009.png" o:title="" croptop="19136f"
+cropbottom="29760f" cropleft="10598f" cropright="16998f" />
+</v:shape><![endif]--><!--[if !vml]--><img width="493" height="173"
+v:shapes="Picture_x0020_1" alt=""
+src="/media/images/altimeter/image010.jpg" /><!--[endif]--></span><span style="font-size: 12pt; line-height: 115%;"><o:p></o:p></span></p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;">PCB Design for the receiver circuit.</span></p>
+<p class="MsoNormal">&nbsp;[<a href="#top">top</a>]</p>
+<hr />
+<p class="MsoNormal">&nbsp;</p>
+<div class="Section1">
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><a name="cd"><b>PICAXE Code for the Altitude Logger</b></a><o:p></o:p></span></p>
+<p><br />
+<b>Transmitter</b><br />
+<i>For a PICAXE 18X</i><br />
+<a href="/media/TRANS_V1.8.zip">Download Zipped Code</a><br />
+<br />
+<b>Receiver</b><br />
+<i>For a PICAXE 28X1</i><br />
+<a href="/media/RECIEVER_V1.8.zip">Download Zipped Code</a></p>
+<p>&nbsp;[<a href="#top">top</a>]</p>
+<p class="MsoNormal"><span style="font-size: 12pt; line-height: 115%;"><o:p></o:p></span></p>
+</div>
+</div>
+</div>
+</div>
+<p align="right" class="MsoNormal" style="text-align: left;"><i>Jon Sowman 2008</i></p>
+<p>&nbsp;</p></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

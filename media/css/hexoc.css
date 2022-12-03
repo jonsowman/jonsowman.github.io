@@ -1,0 +1,16 @@
+.avatar-img {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 3px
+}
+
+.image-montage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image-montage img {
+    border: 0px;
+    padding: 0px;
+}

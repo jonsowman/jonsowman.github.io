@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Weather Station Docs | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="weatherdocs">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li class="active"><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/sgs">Sgs</a>
+<span class="separator">/</span></li>
+<li class="active">
+Weather Station Docs
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">SGS Weather Projects</li>
+
+
+<li><a href="/sgs/weather.html">Weather Station</a></li><li><a href="/sgs/wxsat.html">Satellite Receiver</a></li>
+
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Weather Station Technical Detail</h1>
+
+<p><hr />
+<p>This page documents the weather station a little bit for the benefit of those taking over the project or otherwise involved with the project in the future. The station is a reasonably complex system and requires a decent understanding of its operation before work can be safely carried out. If you need any more information contact me at <a href="mailto:jon@hexoc.com">jon@hexoc.com</a>.</p>
+<h4>The Hardware</h4>
+<p>The station is based around a PICAXE 28X1 microcontroller. This is in the control box on the station itself. The PCB was designed and made by us and is currently on rev.3. Information from the station is transmitted via the SGS LAN out to the internet and then to the weather station server, which is owned and run by Jon (<a href="http://hexoc.com">hexoc.com</a>).</p>
+<p>The basic PICAXE functions are to wake up once every 15 minutes and read data from all the sensors. Some small amount of processing of the information is completed on the PICAXE before the data is sent to the server, but the operational model we adopt is to leave as much data processing as possible to the server. This is because changing code on the server is quick and easy, and it is significantly more powerful than the PICAXE.</p>
+<p>The programme for the PICAXE is on github here: <a
+    href="http://github.com/jonsowman/weather" target="_blank">github.com/jonsowman/weather</a></p>
+<h4>The Sensors</h4>
+<ul>
+    <li>Temperature: We have two temperature sensors; one in the white box on the station and one on long wires tucked underneath the station. These are Dallas 1-wire digital sensors, part number DS18B20. They are wired in active power mode and care must be taken to shrink wrap and insulate the electrical connections on the sensors.</li>
+    <li>Light: We have two light sensors. One is a simple LDR wired to an 8-bit ADC, the other is a photodiode. Since the photodiode has a massive dynamic range (from microvolts in the dark to a couple of volts in daylight). Due to this, a programmable gain amplifier is used. This amplifier has its gain set to 1, and an ADC reading is done. If the voltage is off the bottom of the ADC read, the gain is increased to 2, and the process is repeated. This continues until the ADC read is roughly in the middle of the ADC range. The ADC read and the gain values are sent to the server, which then converts this into a light value in Lux.</li>
+    <li>Wind direction: This is a continuous turn pot, and is simply ADC read and converted to a bearing by the server.</li>
+    <li>Wind speed: A spinner with a magnet on the spindle causes a reed switch to close once per revolution. The PICAXE counts the number of pulses in a 10-second period and sends it to the server, which converts the value to MPH.</li>
+    <li>Pressure: The pressure sensor is of Freescale analogue variety which is fed through a 12-bit ADC. The ADC read is sent to the server which converts the value to a pressure level in mb.</li>
+    <li>Moisture: The moisture sensor is a piece of stripboard, whose resistance changes depending on the water on its surface - this needs removing or replacing as it corrodes and becomes useless very quickly.</li>
+    <li>Humidity: This is currently non-functional. A humidity sensor needs to be implemented.</li>
+</ul>
+<h4>The Website</h4>
+<p>The website for the weather station is at <a href="http://weather.hexoc.com"
+    target="_blank">weather.hexoc.com</a>, and is written almost entirely in PHP. There is some AJAX/JavaScript that powers the &quot;live&quot; updating of the frontpage. The database engine is MySQL and the SQL server also runs on the Hexoc server. The code is mostly well commented and the best way to understand it is to have a good look through it and make sure you understand what each piece does.</p>
+<p>All of the code for the weather station <strong>except
+    config.inc.php</strong> (as it contains database access credentials) is
+available on github here: <a href="http://github.com/jonsowman/sgsweather-web"
+    target="_blank">github.com/jonsowman/sgsweather-web</a>. This code can be cloned to get your own copy, and I will give people access to the server who want to work on the website. You will also have access to a development server for testing things before they go onto the live site.</p>
+<p>All of the website is kept under version control with &quot;git&quot;, so you will need to learn the basics of git before you can work on the site. Version control is very important for a project such as this where lots of people are working on a rather large project.</p>
+<p>The AJAX system is written in jQuery (a JavaScript framework) and contacts the server ('ajax.php') to check for updates and the times when updates are expected.</p>
+<p>There are a few scripts and functions that deal with adding data to the database, namely 'add.php' and 'includes/functions.inc.php'. Most of the rest of the website deals with displaying the data and making useful things like graphs.</p>
+<p>Data for the current and previous months are kept in the database and are archived into CSV files by a PHP script running under cron on the 1st of every month.</p>
+<p>The admin interface contains useful configuration parameters for the station - these are shown and described below:</p>
+<p><img alt="" src="/media/images/wxadmin.png" /></p>
+<ul>
+    <li>Last Update: This shows the IP address and rDNS entry of the place from which the last weather station update came from. If the request was forwarded to this server by another server (in this example, &quot;pippin&quot;) it will be shown here. If the request came directly from SGS, this field will show &quot;Direct Hit&quot;.</li>
+    <li>Clear Database: What it says on the tin. Be careful, you probably never want to do this!</li>
+    <li>Text on next update: The station is set up with the TM4B SMS gateway service, so it will text a configured number when it updates. You can buy 10 texts for about 80p, paid via Paypal, and is extremely useful when testing as you don't have to sit at a computer to make sure the station is still working.</li>
+    <li>Tweet on next update: Force the weather station to send a message to Twitter on next update.</li>
+    <li>Force Records DB update: This forces the server to trawl through all the past CSV archives to refresh the records page (<a href="http://weather.hexoc.com/records.php">here</a>). Take heed of the warning.</li>
+    <li>Update status: allows changing of the STATUS message displayed on the station homepage.</li>
+    <li>LDR correction. The LDR value will be multiplied by this value before being displayed - can be used to bodge a dodgy LDR.</li>
+    <li>Photodiode Constant of Proportionality: The photodiode voltage is directly proportional to light level. This value can be set here.</li>
+    <li>Trackers: these files hold useful information from around the site:<br />
+    - Last hit: Where and when the last update to the station was<br />
+    - Last rejected reading: The server sanity checks the updates as they come in. If they fail, what reading and why it failed will be logged in this file.<br />
+    - Photodiode ADC and gain: The values of gain and ADC from the photodiode from the last update.<br />
+    - Station Time Vars and Pressure: From when we were thinking of getting the system to use the clock on the station itself. At the moment it uses server time, so this file is useless.<br />
+    - Pressure gradient and PMCC: Because it is rate of change of pressure that matters, this is a script that calculates the gradient and PMCC for the last 4 hours of pressure.<br />
+    - CWOP APRS String: From when the station used to update to Citizen's Weather Observers Programme. This is disabled for now.</li>
+</ul>
+<h4>External Websites</h4>
+<p>The station updates to twitter once every few hours. The times when it does so are in the config.inc.php file.</p></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

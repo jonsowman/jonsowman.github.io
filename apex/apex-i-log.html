@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Apex I Project Log | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="apex-i-log">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li class="active"><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/apex">Apex</a>
+<span class="separator">/</span></li>
+<li class="active">
+Apex I Project Log
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">Apex Projects</li>
+
+
+
+<li><a href="/apex/apex-i.html">Apex I</a></li><li><a href="/apex/apex-ii.html">Apex II</a></li>
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Apex I Project Log</h1>
+
+<p><hr />
+<p>
+<ul>
+    <li>09/09/08 - Initial project idea and lots of research into how it's to be done. Researching into TNC and Packet Radio.</li>
+    <li>12/09/08 - Decision to go for the <a href="http://www.tnc-x.com/" target="_blank">TNC-X KISS Mode TNC Kit</a> and the <a href="http://www.pocketgpsworld.com/globalsat-br355-gps-review.php" target="_blank">Globalsat BR-355 SiRF III GPS Receiver</a>.</li>
+    <li>15/09/08 - Recommended to write up costing and specifics on balloon for funding proposal.</li>
+    <li>18/09/08 - Funding confirmed! We can start buying the kit now.</li>
+    <li>22/09/08 - TNC-X and GPS Unit ordered!</li>
+    <li>25/09/08 - Decision made to go for an <a href="http://www.embeddedarm.com/products/board-detail.php?product=TS-7260" target="_blank">ARM based Flight Computer running Debian Linux for ARM</a>. Ordered!</li>
+    <li>06/10/08 - <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=2&amp;pos=8" target="_blank">TNC arrived and has been soldered up</a>. Has been tested as far as possible without a radio.</li>
+    <li>07/10/08 - <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=3&amp;pos=8" target="_blank">Flight Computer arrived</a>. Boots into TS-LINUX using RS232.Console. Radio transcievers ordered.</li>
+    <li>08/10/08 - Switched over to booting Debian Linux for ARM from SD Card.</li>
+    <li>13/10/08 - <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=4&amp;pos=3" target="_blank">BR-355 GPS</a> arrived and working. Connected to serial console to see NMEA 0183 sentences.</li>
+    <li>14/10/08 - Flight Computer running dhcpcd and connected to LAN, access now via SSH. Entirely self-booting.</li>
+    <li>15/10/08 - Sorted out software control of hardware on the Flight Computer, eg. LEDs and DIO lines.</li>
+    <li>16/10/08 - Batteries ordered.</li>
+    <li>21/10/08 - Batteries arrived.</li>
+    <li>23/10/08 - Milled mounting board for TNC and Flight Computer. PCB for Serial Line Driver.</li>
+    <li>24/10/08 - Farnell order sent for the electronic parts for the regulator and coaxial cable for the antennas.</li>
+    <li>25/10/08 - Serial Line Driver PCB completed. As yet untested.</li>
+    <li>04/11/08 - <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=6&amp;pos=1" target="_blank">Yaesu VX-170 Radio</a> arrived, tested and working.</li>
+    <li>09/11/08 - Flight computer finally <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=3&amp;pos=6" target="_blank">booting with new kernel</a> including <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=3&amp;pos=0" target="_blank">MKISS and AX25 protocol suppor</a>t.</li>
+    <li>10/11/08 - First Farnell order arrived, comprising coax cable along with inductors, capacitors and diodes for the power regulation circuitry.</li>
+    <li>15/11/08 - <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=5&amp;pos=0" target="_blank">Regulator PCB</a> built, tested and working. Includes switch mode regulator.</li>
+    <li>17/11/08 - Mounted Serial Line Driver and Regulator PCBs on foam board. Work on flight logic and position reporting Perl scripts.</li>
+    <li>20/11/08 - gpsd running correctly by bypassing the serial line driver on the &quot;data from GPS&quot; line.</li>
+    <li>26/11/08 - Started work on avionics PCB. Decision to make double sided to save space and weight.</li>
+    <li>01/12/08 - Avionics PCB tested and working, and mounted on other side of avionics foam board.</li>
+    <li>02/12/08 - Mounted electronics and avionics in expanded polystyrene block. Comms with flight computer all working.</li>
+    <li>03/12/08 - Bought 433.92Mhz Tx/Rx matched pair. More work on Perl scripting for the flight computer.</li>
+    <li>12/12/08 - Finished logic.pl - cutdown and flight logic script. Including control of siren and light. Camera arrived, Canon Powershot A610 and running CHDK firmware.</li>
+    <li>15/12/08 - First APRS position report appeared on FindU. Sunk from RF by iGate <a href="http://findu.com/cgi-bin/find.cgi?call=M0BEH" target="_blank">M0BEH</a>. Work on camera continues, scripts autostarting correctly.</li>
+    <li>21/12/08 - Built <a href="http://www.hamuniverse.com/slimjim.html" target="_blank">slim jim antenna</a> for testing. New 20m coax 50ohm arrived. Still waiting for second CT-91 cable so work can start on shell-over-radio.</li>
+    <li>24/12/08 - CT-91 cable arrived. Need SWR meter to tune jimmy. Attempted to connect to ax25d/axspawn (bash shell) from AGWPE/AGWTermTCP based laptop. Didn't work.</li>
+    <li>25/12/08 - ax25d not accepting incoming packet conns. listen command shows incoming REQ frame (SABM) but no ACK frame (UA) is returned by the flight computer.</li>
+    <li>27/12/08 - Issue appears to be with the AX.25 kernel networking layer - this should be sending out the UA ACK frame, but it isn't.</li>
+    <li>31/12/08 - Work started on case. No solution to ax25d problem, though netstat --ax25 shows ax25d is listening on port ax0.</li>
+    <li>03/01/09 - Connected mode init'd from the flight computer works.</li>
+    <li>05/01/09 - Looking at trying to run <a href="http://www.langelaar.net/projects/jnos2/index.html" target="_blank">JNOS 2</a> in order to bypass the Linux kernel networking layer to see if that solves the problem...</li>
+    <li>07/01/09 - JNOS not a viable solution, trying MixW on the ground end instead of AGWPE.</li>
+    <li>08/01/09 - MixW didn't solve the problem. The problem either lies with the ground side hardware or the balloon side (Linux machine). Bought Mappoint 2004 for &pound;13 second hand.</li>
+    <li>11/01/09 - Used ax25-config (dialog/bash) to setup AX.25 stuff on the flight computer. Still no joy, problem is precisely the same as before.</li>
+    <li>12/01/09 - Got an SWR meter - an <a target="_blank" href="http://www.mfjenterprises.com/Product.php?productid=MFJ-259B">MFJ-259B</a> kindly lent to us from a local radio club. The slim jim gives an <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=10&amp;pos=2">SWR of 1.3</a> at 144.800Mhz. Bought PL-259 to BNC adapter too, plus another SMA/BNC.</li>
+    <li>13/01/09 - Tuned the slim jim. <a href="http://balloon.hexoc.com/gallery/displayimage.php?album=10&amp;pos=6">SWR of 1.0</a> normally 144.800Mhz, maximum of 1.1.</li>
+    <li>14/01/09 - Mappoint 2004 arrived. Haven't tested with APRSPoint yet. Bought a Kantronics KPC-3 second hand for &pound;30 - will help a lot with testing!</li>
+    <li>15/01/09 - Reinstalled ax25-tools - didn't help.</li>
+    <li>18/01/09 - Tested APRSPoint running on top of Mappoint 2004, working fine. Showing local APRS activity on 144.800 Mhz.</li>
+    <li>19/01/09 - More messing around with ax25d/axspawn. Tried new axspawn.conf to no avail. Interestingly, &quot;netstat -i&quot; shows Tx/Rx packet count correctly. I don't think REQ packet is getting through to ax25d...</li>
+    <li>21/01/09 - KPC-3 arrived. Decision made to abandon trying to get ax25d/axspawn working. Another solution found in using a Perl daemon watching ax25spyd's TCP monitor port. Daemon (ax25perld) written &amp; working.</li>
+    <li>22/01/09 - Control of all necessary aspects achieved with an OTA (over-the-air) command protocol. The flight computer watches incoming packets to see if they match the control callsign, if yes, the commands in the packet are actioned. New case being constructed from corro-plastic.</li>
+    <li>24/01/09 - Bought 20mm PVC pipe and ~8mm dowel for the lightweight quad-heli. Silicone sealed TNC-X/radio interface cable after resoldering without headers/plugs.</li>
+    <li>25/01/09 - Ground side quad-heli nearly complete, need some glue! Found serial loopback adapter for AGWPE, need to test. Re-soldered AGWPE interface cable, need to silicone seal it.</li>
+    <li>26/01/09 - Bit of work on the case and camera mount bracket.</li>
+    <li>27/01/09 - Radio running from the avionics power/regulator board. Only thing left to power from here is the camera. Current draw tests completed: 0.3A idle (no tx) and 0.8A when tx'ing. Not happy with original camera mount bracket, need to make another.</li>
+    <li>28/01/09 - New camera mount constructed from soft soldered Meccano. Attached to case with servo.</li>
+    <li>29/01/09 - Finished the lightweight quadrifilar helicoidal antenna for the balloon.</li>
+    <li>30/01/09 - Lots of work on electronics and scripting. All daemons now include timeouts for PIC things, and recover gracefully from a timeout. PIC has an internal watchdog timer, which resets the IC after 2 minutes of inactivity.</li>
+    <li>03/02/09 - Sponsorship from Virgin Galactic!</li>
+    <li>04/02/09 - We can't use amateur radio as OFCOM don't allow it. PMR446 alternative?</li>
+    <li>05/02/09 - Started looking at possible launch locations. North end of the Cotswolds? CAA/AUS have indicated a 6 month blanket launch permission should not be a problem.</li>
+    <li>06/02/09 - Cutdown device to be around 3 turns of 32 SWG nichrome wire, heatshrunk around the nylon cord.</li>
+    <li>07/02/09 - Decided some method of power cycling the GPS/camera/PIC would be useful. To be controlled from flight computer GPDIO lines.</li>
+    <li>08/02/09 - 433Mhz yagi antenna complete! Made a Free Space Path Loss spreadsheet.</li>
+    <li>09/02/09 - FET PCB designs nearly complete. Decided to launch in Stratford-upon-Avon.</li>
+    <li>10/02/09 - Drilled holes in case for nylon cord. Started wiring up 2x1W LEDs.</li>
+    <li>11/02/09 - Perl scripting work. Logic limit on distance over the ground from launch location, currently at 60 miles. Will automatically cut down if over this.</li>
+    <li>15/02/09 - Write up started for flight computer system.</li>
+    <li>19/02/09 - Started work on 446 MHz eggs.</li>
+    <li>20/02/09 - Done some project writeup work, on comms and base stations.</li>
+    <li>22/02/09 - PIC reading unregulated battery volts from the ADC.</li>
+    <li>24/02/09 - FET board nearly complete, except one BC548.</li>
+    <li>25/02/09 - Finished FET board and wired in - GPS and PIC work from it, but camera doesn't.</li>
+    <li>26/02/09 - Shutdown by inserting JP6 onto the flight computer board. Added hardware power control scripting to flightj.pl and ax25perld.</li>
+    <li>27/02/09 - Shutdown cable made. Tested SGSCYCLE and the hardware power control in killall.pl</li>
+    <li>01/03/09 - PMR446 transmitters (TTi TX-1446). Removed antennas (with a lot of effort).</li>
+    <li>02/03/09 - 6V relay added to the FET board for camera power control. Works fine.</li>
+    <li>03/03/09 - A manual cutdown will be actioned no matter of current GPS state.</li>
+    <li>04/03/09 - flightj.pl - added system calls to hardware power control scripts from the GPDIOs.</li>
+    <li>06/03/09 - System running and transmitting for ~4 hours without fail.</li>
+    <li>10/03/09 - PMR446s require a huge (relatively) TXD (500ms+). Comms between KPC-3 and balloon using 446 works.</li>
+    <li>20/03/09 - Work on 446 MHz antennas.</li>
+    <li>23/03/09 - Antenna mount for the 307 made and bolted on.</li>
+    <li>25/03/09 - Stratford launch site not suitable - under Coventry approach. Moved west of Worcester.</li>
+    <li>26/03/09 - Set up the two tracking station laptops with AGWPE/APRSPoint/Mappoint and custom s/ware.</li>
+    <li>27/03/09 - Hide and seek test one. Not a success, due to not being able to set TXD high enough for the PMR446 tranmitters. New PIC?</li>
+    <li>28/03/09 - Bought two new PICs for re-burning with a modded hex. Increased TXD up to 1.5sec.</li>
+    <li>30/03/09 - Have new hex file. Waiting for PICs to arrive for testing. Not sure whether we can EEPROM burn.</li>
+    <li>01/04/09 - New problem: PMR446 radio coupled with TNC-X attenuated the 2k2 signal too much.</li>
+    <li>03/04/09 - Using an equalizer circuit to boost treble frequencies allows AGWPE to decode the packet again.</li>
+    <li>06/04/09 - Design for a treble boost filter complete &amp; working on breadboard.</li>
+    <li>14/04/09 - PCB design completed for the treble boost filter.</li>
+    <li>16/04/09 - Tracking laptops ready to go - all software installed and working. Need another attenuator.</li>
+    <li>18/04/09 - Picked up UHF antenna analyser for tuning 446MHz eggbeaters.</li>
+    <li>19/04/09 - Both vehicle eggbeaters tuned with an SWR of 1.1-1.2 at 446MHz.</li>
+    <li>20/04/09 - Treble boost filters (CA3240) made and working. Powered from a USB port for convenience.</li>
+    <li>21/04/09 - Testing treble boost filters. Attached notices to payload. Ordered filling eqpt.</li>
+    <li>22/04/09 - Final confirmation of permission from CAA/AUS for launch in Bromyard. Checked balloon &amp; chute.</li>
+    <li>23/04/09 - Helium pickup from Southall. Got filling eqpt.<br />
+    </li>
+    <li>24/04/09 - Final payload testing and cutdown testing. Drive to Stratford upon Avon. Balloon egg tuning complete.</li>
+    <li>25/04/09 - Launch day!</li>
+</ul>
+</p></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

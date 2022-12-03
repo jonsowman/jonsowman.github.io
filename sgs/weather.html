@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Weather Station | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="weather">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li class="active"><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/sgs">Sgs</a>
+<span class="separator">/</span></li>
+<li class="active">
+Weather Station
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">SGS Weather Projects</li>
+
+
+<li class="active"><a href="/sgs/weather.html">Weather Station</a></li><li><a href="/sgs/wxsat.html">Satellite Receiver</a></li>
+
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>SGS Weather Station</h1>
+
+<hr />
+
+<p><strong>On 1st March 2011 the SGS Weather Station was taken offline permanently. </strong></p>
+
+<p>You can view some <a href="/sgs/weatherdocs.html">
+    more technical information</a>.</p>
+
+<p>The first generation station was a standalone battery powered datalogging system. It was built for a school project, taking around three months to design and build. Everything was built from scratch, the casings and sensors were either vacuum formed or CAD/CAM milled from HIPS.</p>
+
+<p>The electronics was microcontroller based (PICAXE 18X originally) and used a DS1307 to log data to EEPROM once every fifteen minutes.</p>
+
+<p>After the school project finished, work on the station continued until it became generation three, which lasted two years until it was finally taken offline in early 2011. The system updated to the internet every fifteen minutes. The PICAXE sent a serial string to a Lantronix XPORT that called a PHP script on this server (hexoc.com). The PHP page's query string contained all the variables from the sensors. PHP and MySQL systems then kicked in to adjust ADC reads and other such things, before data was stored in the database. One month of data was stored there, after which data was archived to CSV files by cron.</p>
+
+<p>The third generation station runs a PICAXE 28X1 which allows hardware based serial IO. The clock was upgraded to a more accurate model (DS3231). The PCB was on its second revision. The XPORT drew a relatively large amount of current, so the PICAXE could switch it on and off when required. The XPORT and power electronics (eg. regulators) sat in a nearby greenhouse, connected to the station via a 5m lead. A 50m ethernet patch lead ran under the floor to connect the XPORT to the school network.</p>
+
+<p>Built by <a href="http://matt.brejza.com" target="_blank">Matt Brejza</a>,
+<a href="/index.html">Jon Sowman</a> and <a
+    href="http://benoxley.com" target="_blank">Ben Oxley</a> between 2007-11.</p>
+
+<p><br />
+<img alt="" style="width: 477px; height: 358px;" src="/media/images/weather.jpg" /></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

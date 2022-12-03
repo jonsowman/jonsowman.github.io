@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Joey-M Flight Computer | Hexoc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/images/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/images/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="joey">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">Hexoc</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li class="active"><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/hab">Hab</a>
+<span class="separator">/</span></li>
+<li class="active">
+Joey-M Flight Computer
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">HAB Projects</li>
+
+
+
+
+<li><a href="/hab/ferret.html">Ferret</a></li><li class="active"><a href="/hab/joey.html">Joey</a></li>
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h2>Joey-M Flight Computer</h2>
+      <h4>A baby Wombat </h4>
+      <hr />
+      
+<p>A lightweight, low power, compact, frequency agile HAB flight computer.
+Designed and built for <a href="http://cusf.co.uk" target="_blank">CU
+    Spaceflight</a> in 2012/2013.</p>
+
+<p>Joey-M uses the uBlox NEO-6Q GPS with a Sarantel SL1202 passive antenna,
+along with a small I2C EEPROM such that configuration can be retained when Joey
+is powered off. USB is broken out to a Micro USB connector such that
+configuration and debugging can be achieved via the excellent u-Center software
+from uBlox, and the configuration saved to EEPROM.</p>
+
+<p>Joey-M uses the Micrel MICRF112 434MHz ISM band 10mW FSK transmitter with a
+twin varactor diode crystal pulling arrangement. Its 13.56MHz crystal has an
+18pF capacitor on one side, and the varactor arrangement designed such that
+under no bias voltage, it also rests at 18pF.</p>
+
+<p>One varactor has a large range of capacitance that allows the center radio frequency to be moved around by about 30kHz. The other varactor has a much smaller range, such that it can be used for very small shifts for FSK. Voltage is applied to the varactors by a twin 16 bit DAC from Linear Technology.</p>
+
+<figure>
+<fig>
+<img class="img-rounded" src="/media/images/micrel.jpg" />
+</fig><figcaption>
+Micrel MICRF112 prototype board for debugging and experimentation.
+</figcaption></figure>
+
+<figure>
+<img class="img-rounded" src="/media/images/joeyr1-1.jpg" />
+<img class="img-rounded" src="/media/images/joeyr1-2.jpg" />
+<figcaption>The Joey-M revision 1 (R1) hardware</figcaption>
+</figure>
+
+<figure>
+<img class="img-rounded" src="/media/images/joeyr1-3.jpg" />
+<figcaption>Joey's first flight was the Nova 21 CU Spaceflight
+mission</figcaption>
+</figure>
+
+<p>The revision 2 (R2) hardware fixes several bugs in the R1 firmware including
+incorrect grounding of the varactor diodes. A batch of 12 boards was
+manufactured in order that a simple, lightweight tracker should always be
+available whenever required at short notice.</p>
+
+<figure>
+<img class="img-rounded" src="/media/images/joeyr2-1.jpg" />
+<img class="img-rounded" src="/media/images/joeyr2-2.jpg" />
+<figcaption>Joey-M revision 2 (R2) PCBs</figcaption>
+</figure>
+
+<p>To ensure a clean spectrum and thereby increasing the ability to decode, the modulator input waveform is digitally filtered in a Gaussian shape to provide GFSK. The step response of the order-50 Gaussian filter is stored in EEPROM on the AVR, and is written out to the DAC on each change of modulator input voltage.</p>
+
+<figure>
+<img class="img-rounded" src="/media/images/joey-gfsk.jpg" />
+<figcaption>Gaussian modulator input for a clean, harmonic-free
+spectrum (300 baud)</figcaption>
+</figure>
+
+  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://hexoc.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

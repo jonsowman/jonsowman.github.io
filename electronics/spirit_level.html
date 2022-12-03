@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Digital Spirit Level | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="spirit_level">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li class="active"><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/electronics">Electronics</a>
+<span class="separator">/</span></li>
+<li class="active">
+Digital Spirit Level
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">Electronics Projects</li>
+
+<li><a href="/electronics/ultrasound.html">Ultrasound Ranger</a></li><li><a href="/electronics/altimeter.html">Altitude Logger</a></li><li class="active"><a href="/electronics/spirit_level.html">Digital Spirit Level</a></li><li><a href="/electronics/ukhasnet.html">UKHASnet</a></li>
+
+
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Digital Spirit Level</h1>
+
+<hr />
+
+<p>The digital spirit level was an A-Level Electronics project. It came from playing with accelerometers and wondering how accurately they could be used to sense orientation of a stationary object.</p>
+
+<p>The project was designed to</p>
+
+<ul>
+    <li>Determine the angle of tilt of the device to &plusmn;0.1&deg;</li>
+    <li>Be able to be calibrated to measure relative to a given surface.</li>
+    <li>Be accurate up to 30&deg;</li>
+    <li>At power on, be automatically calibrated to a true flat surface</li>
+</ul>
+
+<p>The system basically consisted of a three-axis accelerometer from Freescale, the MMA7260QT. This accel has sensitivity select pins allowing selection of 1.5g/2g/4g/6g sensitivity, but since this application is for a stationary system, the pins were hard-wired in the 1.5g setting, giving analogue outputs corresponding to 800mV/g.</p>
+
+<p>I originally had two free samples from Freescale of this unit but unfortunately they turned out to be extremely heat sensitive, and as careful and cautious as I tried to be in soldering them, I ended up damaging them both slightly. The solution was a cheap breakout board that you can see in the images below (green PCB).</p>
+
+<p>These outputs were fed through voltage buffers and then into a Maxim MAX187 12-bit SPI ADC through a 4-way analogue multiplexer (MAX4617/8/9) controlled by a PICAXE 28X microcontroller.</p>
+
+<h4>Power</h4>
+
+<p>In the image below, the top left PCB is the power regulation board. It takes 9V PP3 battery power and converts it to 5V and 3V3 levels via MAX882 and MAX883 linear regulators. Two ports are provided for supplying both voltages to the accelerometer board and the control board.</p>
+
+<p>&nbsp;</p>
+
+<p><a href="http://www.flickr.com/photos/jonsowman/4137075524/" title="DSC04768 by jonsowman, on Flickr"><img width="375" height="500" src="http://farm3.static.flickr.com/2768/4137075524_075b46b361.jpg" alt="DSC04768" /></a></p>
+
+<h4>Accelerometer</h4>
+
+<p>The accelerometer on its breakout board can be seen at the bottom of the picture below (green PCB). The onboard regulator and onboard signal conditioning hardware have been disabled or bypassed, since these important functions were already being carried out by the main PCB that I designed (large white PCB at the top of the image below) as the circuit was originally designed to use a straight accel without the breakout.</p>
+
+<p>&nbsp;</p>
+
+<p><a title="DSC04790 by jonsowman, on Flickr" href="http://www.flickr.com/photos/jonsowman/4136314745/"><img width="500" height="375" alt="DSC04790" src="http://farm3.static.flickr.com/2556/4136314745_6239d48df8.jpg" /></a></p>
+
+<p>&nbsp;</p>
+
+<h4>Control</h4>
+
+<p>The main processing IC was a PICAXE 28X. The PICAXE was programmed to select each of the accelerometer's outputs in turn through the multiplexer and then use bit-banged SPI routines to initiate a conversion in the ADC and then read the results before switching accel outputs (mux inputs) and repeating.</p>
+
+<p>Since the PICAXE in incapable of anything except basic integer arithmetic, a uM-FPU was employed to carry out the (still fairly basic) trigonometry. This was addressed via I2C and is rather irritating to get to work. The definitions provided only make the task marginally easier.</p>
+
+<p>The programming socket for the PICAXE was included on the PCB so as to ease debugging and fault fixing. The image below shows the PICAXE being programmed:</p>
+
+<p>&nbsp;</p>
+
+<p><a href="http://www.flickr.com/photos/jonsowman/4136315199/" title="DSC04761 by jonsowman, on Flickr"><img width="500" height="375" src="http://farm3.static.flickr.com/2667/4136315199_d1ff3922b7.jpg" alt="DSC04761" /></a></p>
+
+<h4>Liquid Display Crystal Screen</h4>
+
+<p>The results of the processing (the angles in the X and Y directions of tilt) were to be displayed on an LCD screen. Luckily I had a nice backlit LCD lying around with included firmware that allowed any microcontroller to talk to it at 4800 baud serial.</p>
+
+<p>In the image below the top line of the display shows an arrow indicating direction of tilt, an X to show the axis, and the angle of tilt in degrees. The second line displays similar information for the Y axis.</p>
+
+<p>&nbsp;</p>
+
+<p><a title="DSC04773 by jonsowman, on Flickr" href="http://www.flickr.com/photos/jonsowman/4137076218/"><img width="500" height="375" alt="DSC04773" src="http://farm3.static.flickr.com/2721/4137076218_0182fe7175.jpg" /></a></p>
+
+<h4>LED Direction Indicators</h4>
+
+<p>The four red LEDs are direction indicators that would light up if the device was tilted in that direction. For example, if the spirit level was tilted in the positive-Y direction, the LED at the positive-Y edge would light.</p>
+
+<p>When the device was not inclined in a given axis (angle of tilt &lt;= 1.0&deg;) both LEDs would light for that axis. As such, when sitting on a flat surface, all four LEDs would be lit (see images below).</p>
+
+<h4>Buttons</h4>
+
+<p>The user inputs to this device are very simple. One button (green) turns power to the device on/off. The calibration button (blue) runs the calibration routine so the device measures everything subsequently relative to the position in which it was calibrated. The picture below displays the two buttons:</p>
+
+<p><a href="http://www.flickr.com/photos/jonsowman/4137076638/" title="DSC04776 by jonsowman, on Flickr"><img width="500" height="375" src="http://farm3.static.flickr.com/2640/4137076638_7c2f224048.jpg" alt="DSC04776" /></a></p>
+
+<p>&nbsp;</p>
+
+<h4>Finished Project</h4>
+
+<p>&nbsp;<a href="http://www.flickr.com/photos/jonsowman/4136313015/" title="DSC04774 by jonsowman, on Flickr"><img width="500" height="375" src="http://farm3.static.flickr.com/2496/4136313015_81216f6a6c.jpg" alt="DSC04774" /></a></p>
+
+<p><a href="http://www.flickr.com/photos/jonsowman/4137077300/" title="DSC04784 by jonsowman, on Flickr"><img width="500" height="375" src="http://farm3.static.flickr.com/2695/4137077300_e4ee8dfbb4.jpg" alt="DSC04784" /></a></p>
+
+<p><a href="http://www.flickr.com/photos/jonsowman/4136313629/" title="DSC04782 by jonsowman, on Flickr"><img width="500" height="375" src="http://farm3.static.flickr.com/2495/4136313629_28ef20ecef.jpg" alt="DSC04782" /></a></p>
+
+<p><a href="http://www.flickr.com/photos/jonsowman/4137075130/" title="DSC04764 by jonsowman, on Flickr"><img width="500" height="375" src="http://farm3.static.flickr.com/2556/4137075130_4cf0d5dc06.jpg" alt="DSC04764" /></a></p>
+
+<h4>PICAXE Program</h4>
+
+<p>Please click the following link to download the program for the PICAXE 28X: <a href="http://www.hexoc.com/media/LCD_DUAL_AXIS_2.6MUX-AVCYC.zip">www.hexoc.com/media/LCD_DUAL_AXIS_2.6MUX-AVCYC.zip</a></p>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>

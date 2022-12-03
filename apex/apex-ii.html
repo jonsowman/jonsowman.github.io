@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="">
+    <title>Apex II | jonsowman</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test description">
+    <meta name="author" content="">
+
+        <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+        <link href="/media/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of
+            floated navbar
+            text */
+            .navbar-text.pull-right
+            {
+                float:
+                none;
+                padding-left:
+                5px;
+                padding-right:
+                5px;
+            }
+        }
+    </style>
+    <link href="/media/css/variables.less" rel="stylesheet">
+    <link href="/media/css/bootswatch.less" rel="stylesheet">
+    <link href="/media/css/hexoc.css" rel="stylesheet">
+        
+            <link rel="shortcut icon" href="/media/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/media/img/appleimgim-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/media/img/apple-touch-icon-114x114.png">
+        
+        
+                  </head>
+
+  <body class="apex-ii">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">jonsowman</a>
+      <div class="nav-collapse collapse">
+                <ul class="nav">
+<li><a href="/">Home</a></li><li><a href="/electronics">Electronics</a></li><li><a href="/sgs">SGS Weather</a></li><li class="active"><a href="/apex">Apex</a></li><li><a href="/hab">HAB</a></li></ul>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+    <div class="container">
+        <ul class="breadcrumb">
+<li>
+<a href="/">Home</a>
+</li>
+<span class="separator">/</span>
+    <li>
+    <a href="/apex">Apex</a>
+<span class="separator">/</span></li>
+<li class="active">
+Apex II
+</li>
+</ul>
+    </div>
+</div>
+
+
+    <div class="container" id="top">
+      
+<div class="row">
+  <div class="span2">
+    <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+    <li class="nav-header">Apex Projects</li>
+
+
+
+<li><a href="/apex/apex-i.html">Apex I</a></li><li class="active"><a href="/apex/apex-ii.html">Apex II</a></li>
+
+</ul>
+    </div><!--well-->
+  </div><!--span-->
+  <div class="span10">
+      <h1>Project Apex II</h1>
+
+<p><hr />
+<img alt="" src="/media/images/apex-ii-logo-640.jpg" /></p>
+<p>Following in the footsteps of Apex I and its unfortunate loss, Version 2  of
+the high altitude weather balloon launched by Sutton Grammar School sets out to
+achieve the same objectives. With a completely redesigned payload and tracking
+system, we hope to make this version easier to track &amp; find.</p>
+
+<h2>Links</h2>
+
+<p><a href="http://apex.hexoc.com/gallery/apex-ii">Image Gallery</a><br />
+<a href="/media/apextech.pdf">Technical Guide</a><br />
+<a href="/media/apex-programming-guide.pdf">Programming Guide</a><br />
+<a href="http://github.com/apexhab/apex-ii" target="_blank">Github Repo</a><br />
+<a target="_blank" href="http://twitter.com/apexhab">@apexhab</a></p></p>
+<h2>Project Details</h2>
+
+<p>The Apex II payload has flown twice, details can be found by clicking the links
+below:
+<ul>
+    <li><a href="/apex/apex-ii-l1.html">Launch 1</a>
+    (<a href="/apex/launch-1-annoucement.html">annoucement</a>) 17/07/10. <b>Recovered.</b> (<a
+        href="http://apex.hexoc.com/apex-ii/track.kml">KML track</a>/<a
+        href="http://maps.google.com/maps?q=http://apex.hexoc.com/apex-ii/track.kml">Google
+        Maps</a>) (<a
+        href="http://apex.hexoc.com/apex-ii/track_w_photo_web.kml">with
+        photos</a>)</li>
+    <li><a href="/apex/apex-ii-l2.html">Launch 2</a>
+    (<a href="/apex/launch-2-annoucement.html">annoucement</a>) 09/04/11. <b>Recovered.</b> (<a
+        href="http://apex.hexoc.com/apex-ii/launch2/track.kml">KML track</a>/<a
+        href="http://maps.google.com/maps?q=http://apex.hexoc.com/apex-ii/launch2/track.kml">Google
+        Maps</a>)</li>
+</ul></p>
+<p>We have a PDF detailing the technical hardware on the payload. The current
+version can be found <a rel="nofollow" href="/media/apextech.pdf">here</a>.</p> <p><strong>Contact us</strong>: send an email to our
+mailing list at <a href="http://mailto:team@apexhab.org">team@apexhab.org</a>.</p>
+<h2>Payload Hardware</h2>
+
+<h4>Communications Subsystem</h4>
+
+<p>The payload on this project is completely different to that of Apex I.  The radio system will have a downlink on 434.075 MHz to make use of the distributed listener,  following the comms protocol detailed <a rel="nofollow" title="http://wiki.ukhas.org.uk/communication:protocol" class="urlextern" bitly="BITLY_PROCESSED" href="http://wiki.ukhas.org.uk/communication:protocol">here</a>.</p>
+
+<p>The &lt;custom data&gt; field of the protocol will contain all the data from our onboard sensors and other equipment. For information and details on the content, format and specification of this part of the telemetry, refer to the Custom Data Format technical document (<a href="http://apex.hexoc.com/media/custom-data-format.pdf">here</a>).</p>
+
+<p>We will be using CRC16 for the checksum as it is much better than XOR or CRC8. We have example code for generating a CRC16 checksum on a PICAXE (<a href="http://github.com/apexhab/apex-ii/blob/master/Program/example-code/crc16.bas">here</a>), and will be implementing this properly for the telemetry packets.</p>
+
+<p>The balloon side radio equipment will consist of one NiM2 narrowband FM  transciever from Radiometrix <a rel="nofollow" title="http://www.radiometrix.co.uk/products/nim2.htm" class="urlextern" bitly="BITLY_PROCESSED" href="http://www.radiometrix.co.uk/products/nim2.htm">link</a>. Current designs designate two modes of data transmission. Packets will be sent almost continuously, alternating between modes. We will create the flight XML for the tracker to set dl-fldigi to configure itself to one mode (the proven one) by default, and require the user to manually switch to the other if they wish to decode that.</p>
+
+<ul>
+    <li>
+   RTTY - 50 baud radioteletype. Proven atmospheric penetration and is required
+   for use of the DL network.
+    </li>
+    <li>
+   Fast RTTY - 300 baud radioteletype. This slightly quicker mode should be
+   easier to pick up in moving vehicles as the chance of dropping parts of the
+   packet is smaller. We'll see.
+    </li>
+</ul>
+
+<p>Every piece of telemetry broadcast over the radio will also be logged to a 4MB flash chip, so we can retrieve a dataset after payload recovery <em>(L1: <a target="_blank" href="http://apex.hexoc.com/apex-ii/data.txt">raw</a>/<a target="_blank" href="http://apex.hexoc.com/apex-ii/data.csv">CSV</a>, L2: <a href="http://apex.hexoc.com/apex-ii/launch2/data.txt">raw</a>/<a href="http://apex.hexoc.com/apex-ii/launch2/data.xls">XLS</a>)</em>.</p>
+
+<h4>GPS</h4>
+
+<p>After recommendation from CUSF and with regards to its low cost and  lack of
+altitude limit, the <a rel="nofollow" target="_blank" href="http://www.dpieshop.com/trimble-lassen-iq-12-channel-gps-module-p-237.html">Lassen iQ</a> GPS unit from Trimble looks like a good  choice. Runs on 3.3V too, and the current draw is perfectly acceptable  for a GPS unit (30-40mA).</p>
+
+<p>Code for parsing NMEA 0183 on the PICAXE is in the code repo <a href="http://github.com/apexhab/apex-ii/tree/master/Program/">here</a>.</p>
+
+<h4>Flight computer</h4>
+
+<p>The flight computer is likely to be a PIC uP. A PICAXE 40X2 (more GPIOs than
+28X2) is very simple but looks like it will be up to the job (can run 4
+programs pseudo-simultaneously). Hardware UART for the radio  transceiver. GPS
+will be a bit tricky but should be OK using qualifiers  and scratchpad buffer.
+Low voltage version (3.3V) available at up to 64 MHz. We run at the higher
+clock rate of 64MHz and switch down to 8MHz when required, such as for lower
+baud rate communications. The Eagle project files and a screenshot (we can't
+guarantee this screenshot is up to date) are on Github (<a
+    href="http://github.com/apexhab/apex-ii/tree/master/PCB/apex2_1/">here</a>).</p>
+
+<h4>GSM Connectivity</h4>
+
+<p>GSM network coverage is scarce when more than 2km above ground  level, and
+certainly non-existent above 5km. We'll turn the GSM transmitter on as soon as
+the balloon starts  to descend and as soon as it manages to connect to a GSM
+network, we'll  get it to transmit GPS coordinates, time and altitude, to
+different people on different GSM networks. It'll do that  every 5-10 minutes
+afterwards as well.</p>
+
+<p>We have done away with the Sony Ericsson USB-serial
+phones as the  MAX3421 is very irritating and we can't get it to work, and not
+through  lack of trying. So we'll be using an old phone with a real UART to
+send  SMS messages. Part of the team are working on finding a suitable phone
+and to get it sending texts from a PICAXE. Their code will be merged  into the
+flight computer one when it's working.</p>
+
+<p>The chosen phones tried were a
+Motorola c115 and a Nokia 6210 (non-Navigator). The team found it difficult to
+get these two varieties working and for the relaunch (L2) we will try and get
+hold of a tried and tested phone (eg. Sony Ericsson T68i or use a proper <a
+    target="_blank"
+    href="http://www.sparkfun.com/commerce/product_info.php?products_id=757">GSM
+    module</a>).</p>
+
+<p>
+<em>For the first launch (L1) we did not use any GSM systems as we were tight on time and could not get them completed in time for the launch. They proved not to be required.<br />
+</em></p>
+
+<h4>Imaging Subsystem</h4>
+
+<p>We will be using two Canon CHDK'able cameras (Ixus 40 / SD300), one pointing
+down and the  other across. These will have revised and improved versions of
+the CHDK  control script we flew on Apex I. For a start, the cameras wll
+automatically be set to manual infinite focus so as to not waste time  trying
+to focus on every picture event.</p>
+
+<p>The lenses of the cameras will be
+exposed and so we may need to look at condensation and freezing issues -
+perhaps power cycling the camera so the lens assembly moves every 5 mins or so
+would be a good idea. Or  simply turning the cameras off between photos.</p>
+
+<p>The CHDK script is on github (<a
+    href="http://github.com/apexhab/apex-ii/tree/master/CHDK">here</a>).</p>
+
+<h4>Power</h4>
+
+<p>Our current plan for power supply will be 4xAA Energizer Ultimate Lithium
+batteries (have verified their reliability with several CUSF launches,
+including <a href="/hab/ferret.html">Ferret</a>).</p>
+
+<p>We are sponsored by <a href="http://www.battery-force.co.uk/"
+    target="_blank">Battery Force</a> who are kindly providing us with all
+batteries for the payload, both for testing and for the launch.</p>
+
+<p><p>The
+regulators are linear ones from Linear Technology. These will be powering the
+following devices and subsystems at the specified voltages.</p>
+<ul>
+    <li>Lassen iQ - 3V3</li>
+    <li>PIC microcontroller - 3V3</li>
+    <li>Camera - Seperate 4xAA Energizer Ultimate Lithium Pack to power both
+    cameras</li>
+    <li>GSM phone - ~3.7V</li>
+    <li>IRD - 2V5-3V for the inverter circuits (seperate 2xAAA Energiser Ultimate
+    Lithium)</li>
+</ul></p>
+<h4>IRD (Ionising Radiation Detectors)</h4>
+
+<p>Centronics have been kind enough to provide us with two compact, low mass (7
+grams) Geiger-Muller detectors. Gamma &amp; other high energy  penetrating
+radiation will be the kinds these can detect. They need a 400-600V supply but
+the current should be very, very low (I proportional to radiation level).</p>
+
+<p>A simple 555/transformer based inverter should suffice. A large cap will  be
+needed to try and smooth out recharging and for the inevitable  higher
+discharge rate at altitude. Need some serious decoupling and  noise
+suppression to prevent cap recharging interfering with RF comms.</p>
+
+<p>Possiblity of continuous ADC on the cap terminals to keep charge rate as
+low as possible whilst maintaining required voltage. The flight  computer can
+disable charging whilst the radio is transmitting to avoid  RF/EMI spikes.</p>
+
+<p>A daughterboard to the flight computer PCB will convert the output from these
+sensors to a count value which the flight computer can request  once a minute,
+before it is reset to 0. This daughterboard design is on github (<a
+    href="http://github.com/apexhab/apex-ii/tree/master/PCB/IRD">here</a>).</p>
+
+<h4>Case</h4>
+
+<p><img alt="" src="http://www.hexoc.com/media/apex-ii-case.jpg" /></p>
+
+<h4>Base Stations  &amp; Receivers</h4>
+
+<p>We'll be using the standard AM-SSB capable radio and dl-fldigi to  decode the incoming signals from the balloon. It's after that that  things get a little more complex.</p>
+
+<p>We would like to be able to visually plot the balloon's position on a  map without relying on an internet connection. As such we aim to write  software to take data from dl-fldigi via its TCP port and output it to the tracking system  we used on Apex I as this worked brilliantly. The data will be fed to Mappoint 2004 so we can see the balloon's position without requiring internet access.</p>
+
+<p>We will have a 3G internet dongle in at least one of the vehicles so  decoded data from the radios can be fed to the DL server. Provided we  have internet connectivity we can also use the DL tracking web page to  see balloon position, altitude, ascent rates, etc. However we aim to  implement all this functionality locally so as to not rely on net  connection.</p>
+
+<p>The software is called &ldquo;Packet Handler&rdquo; and is written in VB. It can be found in the APEX repository on Github (<a href="http://github.com/apexhab/apex-ii/tree/master/PacketHandler/">here</a>).</p>
+
+<p>We will also have a GPS on at least one of the tracking vehicles so its
+position can be plooted by the DL server and tracker. This requires a USB GPS
+receiver and some reasonably simple software. <em>(For L1 the software was a
+    small python script written by <a target="_blank"
+        href="http://github.com/adamgreig">Adam Greig</a>, which can be found <a target="_blank" href="http://github.com/apexhab/apex-ii/blob/master/Installers/chase.py">here</a>).</em></p>
+
+<h2>Team</h2>
+
+<h4>Leaders</h4>
+
+<div>
+<ul>
+    <li>
+    Jon Sowman (<a href="/index.html">website</a>/<a
+        href="http://github.com/jonsowman" target="_blank">github</a>)
+    </li>
+    <li>
+    Ben Oxley (<a href="http://benoxley.com" target="_blank">website</a>/<a
+        href="http://github.com/ben-oxley" target="_blank">github</a>)
+    </li>
+    <li>
+    Matt Brejza (<a href="http://matt.brejza.com"
+        target="_blank">website</a>/<a href="http://github.com/mattbrejza"
+        target="_blank">github</a>)
+    </li>
+</ul>
+
+<h4>Members</h4>
+<ul>
+    <li>
+    Andrew Cowan
+    </li>
+    <li>
+    Richard Morris
+    </li>
+    <li>
+    Dominic Branford
+    </li>
+    <li>
+
+    <div>James Street
+
+    </li>
+    <li>
+    Hrisheekesh Vaidya
+    </li>
+    <li>
+    Priyesh Patel
+    </li>
+    <li>
+    Philip Warren
+    </li>
+    <li>
+    Alex Landless
+    </li>
+    <li>
+    Edward Branford
+    </li>
+    <li>
+    Michael Woodgate
+    </li>
+</ul>
+
+<h4>Staff</h4>
+<div>
+<ul>
+    <li>
+    J. Costello
+    </li>
+    <li>
+    R. Beaumont
+    </li>
+    <li>
+    R. Turner
+    </li>
+    <li>
+    P. Davis
+    </li>
+</ul>  </div><!--span-->
+</div><!--row-->
+
+      <hr>
+      <footer>
+                <p>Created by <a href="http://jonsowman.com">Jon Sowman</a></p>
+              </footer>
+    </div> <!-- /container -->
+
+     
+    
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="/media/js/libs/less.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.10.1.min.js">\x3C/script>')</script>
+    
+        <script src="/media/js/libs/bootstrap.min.js"></script>
+        
+        
+
+    <!--[if lt IE 7 ]>
+      <script src="/media/js/libs/dd_belatedpng.js"></script>
+      <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+
+      </body>
+</html>
